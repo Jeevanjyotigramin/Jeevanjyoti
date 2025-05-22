@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeevan | Jyoti</title>
    <!--  <link rel="stylesheet" href="style.css"> -->
-   
   <!-- Include SweetAlert2 library -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
    <!-- boxicon css link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- Link Swiper's CSS -->
@@ -878,8 +877,6 @@ footer{
     rgba(0,0,0,0.3)0px 30px 60px -30px,
     rgba(10,37,64,0.35)0px -2px 6px 0px inset;
 }
-
-
 #progress-value{
     display: grid;
     height: calc(100% - 12px);
@@ -1096,7 +1093,6 @@ footer{
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Projects</a></li>
-            <li><a href="" onclick="showFormPopup()">check Bill</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="right-header">
@@ -1117,7 +1113,7 @@ footer{
             <p>Jeevan Jyoti Gramin Bidhyut Sahakari Sastha Ltd. is dedicated to providing reliable, affordable, and sustainable electricity to rural areas, fostering growth and development.</p>
 
             <div class="btn-box">
-                <a href="#" target="_blank" class="btn">Get Involved! <i class='bx bx-right-arrow-alt' ></i></a>
+                <a href="#" onclick="showFormPopup()" class="btn">Check Bill <i class='bx bx-right-arrow-alt' ></i></a>
                 <a href="#about" class="btn d-CV">Learn More<i class='bx bx-plug'></i></a>
             </div>
 
@@ -1668,29 +1664,6 @@ footer{
             <i class='bx bxs-chevrons-up' ></i>
         </span>
     </div>
-
-  <script>
-    function showFormPopup() {
-      Swal.fire({
-        title: 'Online Bill',
-        html: `
-          <iframe 
-            src="https://script.google.com/macros/s/AKfycbxv-D-M8W94t7qeSuarKi5GYTWFuTXUnA2WIz8DoybV4MdiLeFtwQlVzMBydidthsrJEA/exec" 
-            width="100%" 
-            height="300px" 
-            frameborder="0" 
-            style="border:0;" 
-            allowfullscreen>
-          </iframe>
-        `,
-        width: 600,
-        showCloseButton: true,
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonText: 'Close'
-      });
-    }
-  </script>
     <!-- scroll reveal  -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- Swiper JS -->
@@ -1698,5 +1671,27 @@ footer{
     <!-- mixitup cdn js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        function showFormPopup() {
+          Swal.fire({
+            position:'top',
+            showCloseButton: true,
+            html: `
+              <iframe 
+                src="https://script.google.com/macros/s/AKfycbxv-D-M8W94t7qeSuarKi5GYTWFuTXUnA2WIz8DoybV4MdiLeFtwQlVzMBydidthsrJEA/exec" 
+                width="100%" 
+                height="1000px" 
+                frameborder="0" 
+                style="border:0;" 
+                allowfullscreen>
+              </iframe>
+            `,
+            showConfirmButton: false,
+          });
+        }
+      </script>
+    
+    
 </body>
 </html>
