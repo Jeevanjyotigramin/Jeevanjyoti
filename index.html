@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeevan | Jyoti</title>
-    <!-- Include SweetAlert2 library -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-    <!-- boxicon css link -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
-        * {
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jeevan | Jyoti</title>
+        <!-- SweetAlert2 (popup) -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Boxicons (icons) -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Mixitup (filter) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+        <!-- ScrollReveal (fly-in) -->
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <style>
+          * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             list-style: none;
             scroll-behavior: smooth;
-        }
-
-        :root {
+            font-family: 'Poppins', system-ui, 'Segoe UI','Mukta', 'Hind', sans-serif;
+          }
+          :root {
+            --primary: #e6006d;
+            --secondary: #630db2;
+            --gradient: linear-gradient(135deg, #e6006d, #a1089c, #630db2);
+            --light-bg: #f8f9ff;
+            --dark: #2c3e50;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --hover-shadow: 0 15px 40px rgba(230,0,109,0.2);
             --bg-color: #e3edf7;
             --gradient-white-bg: linear-gradient(0deg, #fff 0%, #edf4fa 51%, #e5eef7 100%);
             --gradient-color-bg: linear-gradient(180deg, rgba(247, 1, 120, 1) 0%, rgba(160, 8, 156, 1) 51%, rgba(99, 13, 178, 1) 100%);
             --main-color: #e6006d;
-            --font-color: #90979f;
+            --font-color: #4a5c6c;
             --hover-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
             --gradient-white-bg2: linear-gradient(98deg, #e5eef7 0%, #fff 100%);
-        }
-
-        a {
-            text-decoration: none;
-            color: #000;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-color);
-            overflow-x: hidden;
-        }
-
-        header {
-            padding: 15px 8%;
+            --scale-lift: scale(1.04) translateY(-5px);
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          }
+          .main-text, .heading, .jj-about-content .heading,
+          .services .main-text, .portfolio .main-text,
+          .jj-contact-info .main-text, .jj-skills .main-text {
+            text-align: center;
+            width: 100%;
+          }
+          .heading { font-size: 2.2rem; margin-bottom: 0.4rem; }
+          .main-text span { color: var(--font-color); display: block; margin-bottom: 1.5rem; }
+          a { text-decoration: none; color: #000; }
+          a:hover{ transform: scale(1.05);}
+          /* ---------- HEADER ---------- */
+          .jj-header {
+            padding: 12px 5%;
             width: 100%;
             position: fixed;
             top: 0;
@@ -51,1871 +60,1909 @@
             align-items: center;
             justify-content: space-between;
             background: var(--gradient-white-bg);
-            z-index: 100;
-            transition: .3s;
-        }
-
-        header .logo {
-            font-size: 1.7rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-circle {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-color-bg);
-            border-radius: 50%;
-            margin-right: 10px;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        span {
-            background: var(--gradient-color-bg);
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-
-        ul.navlist {
-            display: flex;
-        }
-
-        .navlist li {
-            margin: 0 1rem;
-        }
-
-        .navlist li a {
-            display: inline-flex;
-            font-weight: 600;
-        }
-
-        .navlist li a:hover, .navlist li a.active {
-            background: var(--gradient-color-bg);
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-
-        .right-header {
-            display: flex;
-            align-items: center;
-            justify-content: end;
-            gap: .8rem;
-        }
-
-        .btn {
-            background: var(--gradient-color-bg);
-            color: #fff;
-            padding: 8px 10px;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: all .3s ease;
-        }
-
-        .btn:hover, .btn-box .d-CV:hover {
-            box-shadow: var(--hover-box-shadow);
-        }
-
-        .menu-icon {
-            position: relative;
-            display: block;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-        }
-
-        .menu-icon .bar,
-        .menu-icon::after,
-        .menu-icon::before {
-            content: "";
-            display: none;
-            width: 100%;
-            height: 4px;
-            border-radius: 3px;
-            background: #000;
-            margin: 6px 0;
-            transition: .4s;
-        }
-
-        .menu-icon.active::before {
-            transform: rotate(-45deg) translate(-6px, 6px);
-        }
-
-        .menu-icon.active::after {
-            transform: rotate(45deg) translate(-8px, -8px);
-        }
-
-        .menu-icon.active .bar {
-            opacity: 0;
-        }
-
-        section {
-            padding: 90px 8%;
-        }
-
-        .home {
-            min-height: 100vh;
-            height: 100%;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            align-items: center;
-            gap: 4em;
-            background: var(--gradient-white-bg2);
-        }
-
-        .hero-info {
-            margin-top: 3rem;
-        }
-
-        .hero-info h3 {
-            color: var(--font-color);
-            font-weight: 300;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-        }
-
-        .hero-info h2 {
-            font-size: 2.0rem;
-        }
-
-        .text-animate {
-            width: 22.8rem;
-            position: relative;
-        }
-
-        .text-animate h2 {
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+          }
+          .jj-header .jj-logo {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: transparent;
-            -webkit-text-stroke: 0.1vw #770753;
-            background: var(--gradient-color-bg);
-            background-repeat: no-repeat;
-            background-position: 0 0;
-            transition: .6s;
-            letter-spacing: 2px;
-            animation: moveText 3s linear infinite;
-            animation-delay: 2s;
-        }
-
-        .text-animate h2::before {
-            content: "";
-            position: absolute;
-            top: 7px;
-            left: -3px;
-            width: 0;
-            height: 70%;
-            border-right: 2px solid var(--main-color);
-            animation: moveCursorText 3s linear infinite;
-            animation-delay: 2s;
-        }
-
-        .hero-info p {
-            font-size: .9rem;
-            color: var(--font-color);
-            line-height: 1.5rem;
-        }
-
-        .btn-box {
-            display: flex;
-            justify-content: space-between;
-            width: 320px;
-            margin-top: 2rem;
-            margin-bottom: 6rem;
-        }
-
-        .btn-box .btn {
-            padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 8px;
-        }
-
-        .btn-box .d-CV {
-            background: var(--gradient-white-bg2);
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: 500;
+          }
+          .jj-logo-circle {
+            display: inline-flex;
+            width: 40px; height: 40px;
+            background: var(--gradient-color-bg);
+            border-radius: 50%;
+            justify-content: center; align-items: center;
+            color: white; font-weight: bold;
+            transform: var(--scale-lift);
+            box-shadow: var(--hover-box-shadow);
+          }
+          .jj-gradient-span {
+            background: var(--gradient-color-bg);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+          }
+          .jj-nav {
+            display: flex;
+            gap: 1.5rem;
+            transition: 0.3s;
+          }
+          .jj-nav li a {
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
             color: #000;
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-            transition: all .3s ease;
-        }
-        .social-media {
+            transition: var(--transition-smooth);
+            display: inline-block;
+          }
+          .jj-nav li a:hover,
+          .jj-nav li a.active {
+            background: var(--gradient-color-bg);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transform: translateY(-2px);
+          }
+          .jj-right-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+          }
+          .jj-btn {
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            background: hsla(0, 100%, 50%, 0.1);           
+            border-radius: 60px;
+            color: #1d3b1d;
+            box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+          }
+          .jj-btn:hover { 
+            background: var(--gradient-color-bg);
+            box-shadow: var(--hover-box-shadow); transform: var(--scale-lift); }
+          
+          .jj-menu-icon {
+            display: none;
+            width: 30px; height: 30px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+          }
+          .jj-menu-icon .jj-bar,
+          .jj-menu-icon::after,
+          .jj-menu-icon::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            transition: 0.3s;
+          }
+          .jj-menu-icon.active .jj-bar { opacity: 0; }
+          .jj-menu-icon.active::before { transform: rotate(45deg) translate(5px, 6px); }
+          .jj-menu-icon.active::after { transform: rotate(-45deg) translate(5px, -6px); }
+          .jj-overlay {
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 900;
+            opacity:0; pointer-events:none;
+            transition:0.3s;
+          }
+          body.jj-open .jj-overlay { opacity:1; pointer-events:auto; }
+          section { padding: 60px 5%; width: 100%; overflow-x: hidden; }
+          /* ---------- HOME ---------- */
+          .jj-home {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+            background: var(--gradient-white-bg2);
+            margin-top: 0;
+            padding-top: 100px;
+            width: 100%;
+          }
+          .jj-hero-info h3 { color: var(--font-color); font-weight: 400; font-size: 1.2rem; }
+          .jj-hero-info h1 { font-size: 2.5rem; line-height:1.2; margin:10px 0; }
+          .jj-text-animate {
+            width:100%; max-width:400px; position:relative; margin:10px 0;
+          }
+          .jj-text-animate h2 {
+            font-size:3rem; font-weight:700; color:transparent;
+            -webkit-text-stroke:1px #770753;
+            background: var(--gradient-color-bg);
+            background-repeat:no-repeat;
+            background-position:-24rem 0;
+            animation: jj-moveText 3s linear infinite;
+            letter-spacing:1px;
+          }
+          @keyframes jj-moveText {
+            0%,100%{ background-position:-24rem 0; }
+            70%{ background-position:0 0; }
+          }
+          .jj-hero-info p { color:var(--font-color); margin:15px 0; line-height:1.5; }
+          .img-hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            animation: jj-floatImage 4s ease-in-out infinite;
+            max-width: 100%;
+          }
+          .img-hero img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            object-fit: contain;
+            z-index: 30;
+            border-radius: 20px;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            transition: var(--transition-smooth);
+          }
+          .img-hero img:hover { transform: scale(1.02) translateY(-8px); filter: drop-shadow(0 20px 25px rgba(230,0,109,0.2)); }
+          .rotate-text {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;
+            max-width: 520px;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            pointer-events: none;
+          }
+          .rotate-text .text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #f2f6fb;
+            box-shadow: 0 1px 6px 5.94px rgba(0,0,0,0.2);
+            animation: rotateText 30s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .text p { position: relative; width:100%; height:100%; margin:0; padding:0; }
+          .text b {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            display: block;
+            white-space: nowrap;
+            font-weight: 600;
+            font-size: calc(0.8rem + 0.6vw);
+            background: linear-gradient(180deg, #f70178, #a1089c, #630db2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transform-origin: 0 50%;
+          }
+          .rotate-text span {
+            position: absolute;
+            width: 83%;
+            height: 83%;
+            border-radius: 50%;
+            border: 4px solid #eaeef0;
+            background: rgba(200, 40, 100, 0.1);
+            z-index: 1;
+            overflow: hidden;
+          }
+          .rotate-text span i {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #f70178, #a1089c, #630db2);
+            filter: blur(6px);
+            animation: animate 2s linear infinite;
+            opacity: 0.7;
+          }
+          @keyframes jj-floatImage {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+          }
+          @keyframes rotateText {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+          }
+          @keyframes animate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          .jj-btn-box { display: flex; gap:1rem; margin:2rem 0; flex-wrap: wrap; }
+          .jj-btn-box .jj-d-CV {
+             padding:8px 16px; border-radius:60px;
+            box-shadow: 0 4px 0 #b1741c;
+            display:flex; align-items:center; gap:5px;
+          }
+          .jj-social-media {
             display: flex;
             justify-content: space-between;
             width: 220px;
             height: 45px;
-        }
-
-        .social-media a {
-            width: 42px;
-            height: 42px;
-            font-size: 1.5rem;
-            color: var(--main-color);
-            background: #fff;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            transition: .4s;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .social-media a:hover {
-            background: var(--gradient-color-bg);
-            color: #fff;
-        }
-
-        .bg-icon {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bg-icon span {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-color-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          }
+          
+          .jj-social-media a {
+            width: 42px; height: 42px; font-size: 1.5rem;
+            background: var(--gradient-color-bg); color:white;
+            display: inline-flex; justify-content: center; align-items: center;
+            transition: var(--transition-smooth); border-radius: 50%; z-index: 1;
+          } 
+          .jj-social-media a:hover { transform: var(--scale-lift); box-shadow: var(--hover-box-shadow); }
+          .jj-bg-icon{ position: relative; display: flex; justify-content: center; align-items: center; }
+          .jj-bg-icon span {
+            position: absolute; width: 50px; height: 50px;
+            background: var(--gradient-color-bg); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             animation: animate 1s linear infinite;
-        }
-
-        .img-hero {
-            position: relative;
-            animation: floatImage 4s ease-in-out infinite;
-            animation-delay: 3s;
-        }
-
-        .img-hero img {
-            position: relative;
-            width: 400px;
-            height: auto;
-            z-index: 10;
-        }
-
-        .rotate-text {
-            position: absolute;
-            top: 4%;
-            left: -53px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            padding: 2rem;
-        }
-
-        .rotate-text span {
-            position: relative;
-            width: 442px;
-            height: 442px;
-            background: red;
-            border: 6px solid #eaeef0;
-            border-radius: 50%;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .rotate-text span::before {
-            content: "";
-            position: absolute;
-            inset: 20px;
-            background: #00aaff;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .rotate-text span i {
-            position: absolute;
-            inset: 0;
+          }
+          /* ---------- ABOUT ---------- */
+          .jj-about {
+            display:flex; align-items:center; gap:3rem; flex-wrap:wrap; width:100%;
+            overflow: visible;
+          }
+          .jj-about .img-hero { flex:1; min-width:280px; }
+          .jj-about-content { flex:2; }
+          .jj-about-btn { display:flex; gap:0.8rem; flex-wrap:wrap; margin:1rem 0; justify-content:center; }
+          .jj-about-btn button {
+            padding:10px 18px; border:none; border-radius:30px; font-weight:500;
+            background: hsla(0, 100%, 50%, 0.1); box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e; cursor:pointer;
+            transition: var(--transition-smooth);
+          }
+          .jj-about-btn button:hover {
+            color: #fff;
             background: var(--gradient-color-bg);
-            filter: blur(5px);
-            animation: animate 2s linear infinite;
-        }
-
-        .rotate-text .text {
-            position: absolute;
-            width: 490px;
-            height: 490px;
-            background: #f2f6fb;
-            border-radius: 50%;
-            box-shadow: 0 1px 6px 5.94px rgba(0, 0, 0, 0.2);
-            animation: rotateText 30s linear infinite;
-        }
-
-        .text b {
-            position: absolute;
-            transform-origin: 0 247px;
-            display: block;
-            top: 0;
-            left: 50%;
+            box-shadow: var(--hover-box-shadow); transform: var(--scale-lift);
+          }
+          .jj-content-btn .jj-content { margin-top:1rem; display:none; }
+          .jj-content-btn .jj-content:first-child { display:block; }
+          .jj-content .text-box p { text-align:center; }
+          
+          
+          .services-container {
+            max-width: 100%;
+            margin: 0 auto;
+          }
+          .services-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+          }
+          .services-header h1 {
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+          }
+          .service-count {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+          }
+          .service-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+            line-height: 1.4;
+          }
+          .service-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+          }
+          .service-features {
+            list-style: none;
+            margin-top: 1rem;
+          }
+          .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            color: #555;
+            font-size: 0.9rem;
+          }
+          .service-features li i {
+            color: var(--primary);
             font-size: 1.2rem;
-        }
-
-        .about {
+          }
+          .service-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
-        }
-
-        .about .about-img {
-            position: relative;
-        }
-
-        .about .about-img .aboutHero {
-            width: 40vw;
-            height: auto;
-        }
-
-        .about-img .ring {
-            position: absolute;
-            top: 22%;
-            right: 1%;
-        }
-
-        .about-img .circle {
-            position: absolute;
-            top: 0%;
-            left: 0%;
-        }
-
-        .about-content {
-            padding: 3rem 0;
-        }
-
-        .about-content h2 {
-            color: var(--main-color);
-        }
-
-        .about-content h3 {
-            font-size: 2.1rem;
-            line-height: 3rem;
-            margin: .5rem 0;
-        }
-
-        .about-content p {
-            color: var(--font-color);
-        }
-
-        .text-box p {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .about-btn {
-            margin: .8rem 0;
-        }
-
-        .about-btn button, .cvContent a {
-            background: var(--gradient-white-bg2);
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #000;
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-            margin-right: .5rem;
-            cursor: pointer;
-            transition: all .3s ease;
-        }
-
-        .about-btn button.active {
-            background: var(--gradient-color-bg);
-            color: #fff;
-        }
-
-        .text-box {
-            margin: .8rem 0;
-        }
-
-        .content-btn > .content:not(:first-child) {
-            display: none;
-        }
-
-        .about-btn button:hover {
-            box-shadow: var(--hover-box-shadow);
-        }
-
-        .cvContent {
             margin-top: 1.5rem;
-        }
-
-        .services {
-            position: relative;
-        }
-
-        .main-text {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .main-text .heading {
-            color: var(--main-color);
-        }
-
-        .main-text span {
-            color: white;
-            font-weight: 200;
-            text-transform: uppercase;
-        }
-        
-        .fullscreen-popup {
-            width: 100vw !important;
-            height: 100vh !important;
-            max-width: 100vw !important;
-            margin: 0;
-            padding: 0 !important;
-        }
-
-        .iframe-container {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .allServices {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+            padding-top: 1rem;
+            border-top: 2px dashed rgba(230,0,109,0.2);
+          }
+          .service-price {
+            background: linear-gradient(135deg, #f0f0f0, #ffffff);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: var(--primary);
+          }
+          .service-link {
+            padding:10px 18px;
+            border:none; border-radius:30px; 
+            font-weight:500;
+            background: hsla(0, 100%, 50%, 0.1); 
+            box-shadow: 0 4px 0 #b1741c; 
+            cursor:pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            display: flex;
             align-items: center;
+            gap: 0.3rem;
+          }
+          .service-link:hover {
+            gap: 0.8rem;
+            color: #fff;
+            background: var(--gradient-color-bg);
+            box-shadow: var(--hover-box-shadow); transform: var(--scale-lift);;
+          }
+          .service-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            margin:10px;
+            background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 1rem;
+          }
+          
+          .jj-allServices {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
             gap: 2rem;
             position: relative;
             z-index: 1;
-        }
-
-        .servicesItem {
+          }
+          .jj-servicesItem {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
             padding: 2rem 1rem;
             border-radius: 10px;
             background: var(--gradient-white-bg2);
             text-align: center;
+            transition: var(--transition-smooth);
             position: relative;
-        }
-
-        .icon-services {
+            z-index: 1;
+          }
+          .jj-servicesItem:hover {
+            transform: var(--scale-lift);
+            box-shadow: var(--hover-box-shadow);
+          }
+          .jj-icon-services {
             display: inline-flex;
             position: relative;
-        }
-
-        .icon-services i {
+          }
+          .jj-icon-services i {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
             padding: .5rem;
             border-radius: 50%;
             background: var(--gradient-color-bg);
-            width: 70px;
-            height: 70px;
-            color: #fff;
-            font-size: 2.5rem;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            transition: .4s;
-            z-index: 1;
-        }
-
-        .servicesItem:hover i {
-            outline: 1px solid var(--main-color);
-            transform: scale(1.2);
-        }
-
-        .icon-services span {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            left: -5px;
-            top: -5px;
-            background: var(--gradient-color-bg);
-            border-radius: 50%;
+            width: 70px; height: 70px; color: #fff; font-size: 2.5rem;
+            display: inline-flex; justify-content: center; align-items: center;
+            transition: var(--transition-smooth); z-index: 1;
+          }
+          .jj-servicesItem:hover i { outline: 2px solid var(--main-color); transform: scale(1.15); }
+          .jj-icon-services span {
+            position: absolute; width: 80px; height: 80px; left: -5px; top: -5px;
+            background: var(--gradient-color-bg); border-radius: 50%;
             animation: animate 1s linear infinite;
-        }
-
-        .servicesItem h3 {
-            margin: 1rem 0 0.5rem;
-        }
-
-        .servicesItem p {
-            margin-bottom: 1.5rem;
-            font-size: .9rem;
-            color: var(--font-color);
-        }
-
-        .readMore {
-            background: var(--gradient-white-bg2);
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #000;
-            margin-right: .8rem;
-            cursor: pointer;
-            transition: all .3s ease;
-        }
-
-        .readMore:hover {
+          }
+          .jj-servicesItem h3 { margin: 1rem 0 0.5rem; }
+          .jj-servicesItem p { margin-bottom: 1.5rem; font-size: .9rem; color: var(--font-color); }
+          .jj-hidden-info {
+            display:none; background:var(--gradient-white-bg2); padding:1.5rem; border-radius:10px;
+            margin-top:1rem; text-align:left; border:1px solid #f0c0d0; transition: var(--transition-smooth);
+            position: relative;
+            z-index: 100;
+          }
+          .jj-hidden-info.active { display:block; animation: fadeSlide 0.2s ease; }
+          @keyframes fadeSlide { from{opacity:0;transform:translateY(-5px);} to{opacity:1;transform:translateY(0);} }
+          .jj-readMore {
+            background:white; padding:8px 15px; border-radius:30px; font-weight:500;
+            color:#e6006d; display:inline-block; margin-top:1rem;
+            cursor:pointer; transition: var(--transition-smooth);
+            box-shadow: 0 4px 0 #b1741c;
+          }
+          .jj-readMore:hover { color: #fff;
             background: var(--gradient-color-bg);
+            box-shadow: var(--hover-box-shadow); transform: scale(1.05); }
+          /* ---------- PORTFOLIO (team gallery) ---------- */
+          .jj-fillter-buttons {
+            text-align: center; margin: 2rem 0; display: flex; flex-wrap: wrap;
+            gap: 0.5rem; justify-content: center;
+          }
+          .jj-fillter-buttons button {
+            padding: 10px 20px; border: none; border-radius: 30px;
+            font-weight: 500; box-shadow: 0 4px 0 #b1741c; cursor: pointer;
+            transition: var(--transition-smooth);
+          }
+          .jj-fillter-buttons button:hover {
             color: #fff;
-        }
-
-        .hidden-info {
-            display: none;
-            position: absolute;
-            top: 35%;
-            left: 0;
+            background: var(--gradient-color-bg);
+            box-shadow: var(--hover-box-shadow); transform: var(--scale-lift);
+          }
+          .jj-fillter-buttons button.mixitup-control-active,
+          .jj-fillter-buttons button.active-filter {
+            background: var(--gradient-color-bg); color: white;
+          }
+          .jj-portfolio-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 330px));
+            gap: 2rem;
+            width: 100%;
+            justify-content: center;
+          }
+          .jj-portfolio-box {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+            border-radius: 10px;
             background: var(--gradient-white-bg2);
             padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            z-index: 100;
+            display: flex; justify-content: center; align-items: center; gap: 1rem;
+            transition: var(--transition-smooth);
             width: 100%;
-            max-width: 100%;
-            text-align: left;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        .hidden-info.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            margin-top: 10px;
-        }
-
-        .proposal {
+            margin: 0 auto;
             position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            background: var(--gradient-white-bg2);
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-            margin-top: 8rem;
-            border-radius: 10px;
-            padding: 0rem 2rem;
             z-index: 1;
-        }
-
-        .proposal img {
-            width: 350px;
-            height: auto;
-            margin-top: -4rem;
-            z-index: 2;
-        }
-
-        .services .text-box span {
-            color: var(--font-color);
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .services .text-box h3 {
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .services .text-box .btn {
-            padding: 10px 20px;
-        }
-
-        .services .showcase .ring {
-            width: 100px;
-            height: auto;
-            position: absolute;
-            top: 2%;
-            left: -3%;
-        }
-
-        .services .showcase .circle {
-            position: absolute;
-            width: 70px;
-            height: auto;
-            top: 2%;
-            right: 6%;
-            filter: blur(3px);
-        }
-
-        .services .showcase .circle2 {
-            position: absolute;
-            width: 40px;
-            height: auto;
-            filter: blur(3px);
-        }
-
-        .services .showcase .circle3 {
-            position: absolute;
-            width: 70px;
-            height: auto;
-            filter: blur(3px);
-            bottom: 36%;
-            left: 22%;
-        }
-
-        .services .showcase .half-ring {
-            position: absolute;
-            width: 120px;
-            height: auto;
-            bottom: 4%;
-            right: 6%;
-        }
-
-        .fillter-buttons {
-            text-align: center;
-            padding: .5rem;
-            margin-bottom: 2rem;
-        }
-
-        .fillter-buttons button {
-            background: var(--gradient-white-bg2);
-            padding: 12px 15px;
-            border-radius: 5px;
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #000;
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-            margin-right: .5rem;
-            cursor: pointer;
-            transition: all .3s ease;
-        }
-
-        .fillter-buttons button:hover, .fillter-buttons button.mixitup-control-active {
-            background: var(--gradient-color-bg);
-            color: #fff;
-        }
-
-        .portfolio-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-            gap: 1rem;
-        }
-
-        .portfolio-img img {
-            display: block;
-            width: 70%;
-            height: 160px;
-            transition: .3s;
-        }
-
-        .portfolio-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: .5rem;
-            padding: .5rem;
-            box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
-            background: var(--gradient-white-bg2);
+          }
+          .jj-portfolio-box:hover {
+            transform: var(--scale-lift);
+            box-shadow: var(--hover-box-shadow);
+          }
+          .jj-portfolio-content { flex:2; text-align: left; }
+          .jj-portfolio-content h3 { font-size: 1.2rem; }
+          .jj-portfolio-img {
+            flex:1;
             border-radius: 10px;
-            transition: all .3s ease;
-            position: relative;
-        }
-
-        .portfolio-box:hover img {
-            transform: scale(1.1);
-        }
-
-        .portfolio-content {
-            width: 100%;
-            padding-left: .5rem;
-            padding-bottom: .5rem;
-        }
-
-        .portfolio-img {
-            width: 100%;
-            border-radius: 5px;
+            border:1px solid rgba(0,0,0,0.1);
             overflow: hidden;
-        }
-
-        .portfolio-content a.readMore {
-            padding: 8px 12px;
-            font-size: .8rem;
-        }
-
-        .portfolio-content p {
-            font-size: .9rem;
-            color: var(--font-color);
-            margin: .5rem 0 1rem 0;
-        }
-
-        .imge {
-            display: block;
-            width: 25%;
-            height: 160px;
-            transition: .3s;
-        }
-
-        .contactSkills {
-            display: flex;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .contact-info, .skills {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0;
+            transition: transform 0.4s ease;
+          }
+          .jj-portfolio-img img {
             width: 100%;
-            background: var(--gradient-white-bg2);
-            box-shadow: rgb(248, 245, 245) 0px 2px 4px;
-            padding: 0.5rem;
+            height: 125px;
             border-radius: 10px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+          }
+          .jj-portfolio-img img:hover { transform: scale(1.15); }
+          .jj-portfolio-gallery.res { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,330px)); justify-content: center; }
+          /* contact */
+          .jj-contactSkills {display:flex; gap:2rem; flex-wrap:wrap; width:100%;}
+          .jj-contact-info, .jj-skills {flex:1; min-width:280px; padding:2rem; border-radius:5px; background: var(--gradient-white-bg2); box-shadow:rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; transition: var(--transition-smooth);}
+          .jj-contact-info:hover, .jj-skills:hover { box-shadow: var(--hover-box-shadow); }
+          .jj-input-box { margin-bottom:1rem; }
+          .jj-input-box input, .jj-input-box textarea {
+            width:100%; padding:12px 10px; margin:0; border-radius:10px; border:1px solid #fff;
+            font-family:inherit; outline:none; transition:0.3s; background:#fff;
+          }
+          .jj-input-box input:focus, .jj-input-box textarea:focus { border-color:#e6006d; transform: scale(1.01); }
+          .jj-error-message { color:#e6006d; font-size:0.8rem; margin-top:4px; display:none; }
+          .jj-input-error { border-color:#e6006d !important; }
+          .jj-footer { text-align:center; padding:2rem 5%; border-top:1px solid #d4d4d4; background:var(--gradient-white-bg); width:100%; }
+          .formBtn { border:none; }
+          .formsummitbtn {display:flex; justify-content: space-around; gap: 10px; margin-top: 20px;}
+           
+          .jj.feedback-btn.whatsapp {
+              background-color: #25D366;
+              color: white;
+          }
+        
+          .jj.feedback-btn.whatsapp:hover {
+              background-color: #128C7E;
+              transform: translateY(-3px);
+          }
+        
+          .jj.feedback-btn.email {
+              background-color: var(--primary);
+              color: white;
+          }
+        
+          .jj.feedback-btn.email:hover {
+              background-color: #c1121f;
+              transform: translateY(-3px);
+          }
+          
+          /* Fix for form buttons */
+          #sendWhatsApp, #sendEmail {
+            width: 120px;
+            justify-content: center;
+          }
+          
+          .jj-progress {
+            position:fixed; bottom:30px; right:20px; width:50px; height:50px;
+            background:conic-gradient(#fff 0%, #e6006d 0%); border-radius:50%;
+            display:none; place-items:center; cursor:pointer; z-index:99;
+          }
+          .jj-progress-value {
+            width:40px; height:40px; background:var(--gradient-color-bg); border-radius:50%;
+            display:flex; align-items:center; justify-content:center; color:white;
+            transition: var(--transition-smooth);
+          }
+          .jj-progress-value:hover { transform: scale(1.1); }
+          /* fullscreen bill popup */
+          .fullscreen-popup {
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+            position: fixed !important;
+          }
+          
+          .fullscreen-popup .swal2-close {
+            font-size: 4rem !important;   /* Increase size */
+            color: #1d3b1d;
+            right: 20px !important;
+            top: 15px !important;
         }
-
-        .contact-info input,
-        .contact-info form textarea {
+          .fullscreen-popup .swal2-close:hover {
+            color: red !important;
+        }
+          .iframe-container {
             width: 100%;
-        }
-       
-        .contact-info form input,
-        .contact-info form textarea {
-            padding: 0.8rem;
-            border: 2px solid #e8e1e1;
-            margin: 0.5rem 0;
-            background: #e8f1f9;
-            border-radius: 5px;
-            outline: none;
-            transition: .3s;
-        }
-
-        .contact-info form .input-box {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .input-box input {
-            width: 100%;
-        }
-
-        form input:focus, form textarea:focus {
-            filter: brightness(100%);
-            background: #d2e9ff;
-            border: 2px solid #f8caca;
-        }
-
-        form textarea {
-            resize: none;
-        }
-
-        form .btn {
-            padding: 15px 20px;
-            cursor: pointer;
-            border: none;
-        }
-        .skillBox {
-            padding: 0 1rem 1rem;
-        }
-
-        .skillBox .main-text {
-            margin-bottom: 1rem;
-        }
-
-        .skill-wrap {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-            justify-content: center;
-            grid-gap: 2.5rem;
-        }
-
-        .skill {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .outer-circle {
-            width: 170px;
-            height: 170px;
-            position: relative;
-            margin-bottom: 1rem;
-            padding: 20px;
-            border-radius: 50%;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .inner-circle {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            box-shadow: rgba(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-        }
-
-        .outer-circle svg {
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
+          }
+          .iframe-container iframe {
             width: 100%;
             height: 100%;
-        }
-
-        .outer-circle svg circle {
-            fill: none;
-            stroke-width: 15px;
-            stroke: url(#GradientColor);
-            stroke-linecap: round;
-            stroke-dasharray: 465;
-            stroke-dashoffset: 464;
-        }
-
-        .outer-circle h2.counter {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            font-size: .9rem;
-            font-weight: 400;
-        }
-
-        h2.counter span {
-            font-size: 1.7rem;
-        }
-
-        .sk-title {
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        footer {
-            text-align: center;
-            margin: 0 8%;
-            padding: 2rem 0;
-            border-top: 2px solid #e8e1e1;
-        }
-
-        #progress {
-            position: fixed;
-            z-index: 1000;
-            bottom: 60px;
-            right: 10px;
-            width: 50px;
-            height: 50px;
-            display: none;
-            place-items: center;
-            border-radius: 50%;
-            color: #1d002c;
-            cursor: pointer;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-        }
-
-        #progress-value {
+            border: none;
+          }
+          /* Fly-in animation classes */
+          .fly-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+          }
+          .fly-in.active {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          
+          /* responsive */
+          @media (max-width: 991px) {
+            .jj-home { grid-template-columns:1fr; text-align:center; gap:1rem; }
+            .jj-hero-info { order:2; }
+            .img-hero { order:1; margin-top:20px; }
+            .rotate-text { max-width: 480px; }
+          }
+          @media (max-width: 768px) {
+            .jj-header { padding:10px 4%; }
+            .jj-menu-icon { display:flex; }
+            .jj-nav {
+              position:absolute; top:100%; left:0; width:100%; background:var(--gradient-white-bg);
+              flex-direction:column; align-items:center; padding:20px 0; gap:1.2rem;
+              transform:translateY(-150%); opacity:0; pointer-events:none; transition:0.3s; z-index:999; }
+            .jj-nav.active { transform:translateY(0); opacity:1; pointer-events:auto; }
+            .jj-nav li a { font-size:1.2rem; }
+            .jj-right-header .jj-btn { padding:6px 12px; font-size:0.9rem; }
+            .img-hero img { max-width:280px; }
+            .rotate-text { width: 140%; max-width:420px; }
+            .jj-allServices {
             display: grid;
-            height: calc(100% - 12px);
-            width: calc(100% - 12px);
-            background: var(--gradient-color-bg);
-            border-radius: 50%;
-            color: #fff;
-            place-items: center;
-            font-size: 25px;
-        }
-        /* Add this new style for form validation */
-        .error-message {
-            color: #e6006d;
-            font-size: 0.8rem;
-            margin-top: -0.5rem;
-            margin-bottom: 0.5rem;
-            display: none;
-        }
+            grid-template-columns: 1fr;
+              padding-bottom:10px;
+            }
+            .jj-portfolio-gallery { justify-content: center; width: 100%; margin-bottom: 2rem; }
+            .jj-portfolio-box {max-width:400px;}
+            .jj-about { flex-direction:column; }
+            .jj-contactSkills { flex-direction:column; }
+            body, html { overflow-x: hidden; width: 100%; }
+            section { padding:3% 2%;}
+          }
+          @media (max-width: 600px) {
+            .rotate-text { width: 145%; }
+          }
+          @media (max-width: 480px) {
+            .img-hero img { max-width:240px; }
+            .rotate-text { width: 150%; max-width:360px; }
+            .rotate-text .text b { font-size: 0.65rem; }
+            .jj-btn-box { justify-content:center; }
+            .jj-hero-info h1 { font-size:2rem; }
+          }
+        </style>
+    </head>
+    <body>
+        <div class="jj-overlay"></div>
+        <div class="jj-header">
+          <a href="https://jibanjyotigramin.blogspot.com/" class="jj-logo"><span class="jj-logo-circle">JJ</span> <span class="jj-gradient-span">JEEVAN JYOTI</span></a>
+          <ul class="jj-nav">
+            <li><a href="#home" class="active">गृहपृष्ठ</a></li>
+            <li><a href="#about">हाम्रो बारेमा</a></li>
+            <li><a href="#services">सेवाहरू</a></li>
+            <li><a href="#portfolio">परियोजनाहरू</a></li>
+            <li><a href="#portfolio">सूचनाहरू</a></li>
+            <li><a href="#contact">सम्पर्क</a></li>
+          </ul>
+          <div class="jj-right-header">
+            <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="jj-btn">कुराकानी गरौं <i class='bx bx-message-dots'></i></a>
+            <div class="jj-menu-icon"><div class="jj-bar"></div></div>
+          </div>
+        </div>
+        <!-- HOME -->
+        <section class="jj-home" id="home">
+          <div class="jj-hero-info fly-in" data-delay="100">
+            <br><br>
+            <h3>जीवन ज्योतिमा स्वागत छ.....</h3>
+            <h1>समुदायहरूलाई विद्युतले सशक्त बनाउँदै..…..</h1>
+            <div class="jj-text-animate"><h2>जीबन ज्योति ग्रामीण बिद्युत सहकारी संस्था लिमिटेड</h2></div>
+            <p>जीवन ज्योति ग्रामीण विद्युत सहकारी संस्था लिमिटेडले ग्रामीण क्षेत्रमा भरपर्दो, सस्तो र दिगो विद्युत सेवा उपलब्ध गराउन समर्पित छ।</p>
+            <div class="jj-btn-box">
+              <a href="#" onclick="showFormPopup()" class="jj-btn">बिल जाँच गर्नुहोस् <i class='bx bx-right-arrow-alt'></i></a>
+              <a href="#about" class="jj-btn jj-d-CV">थप जान्नुहोस् <i class='bx bx-plug'></i></a>
+            </div>
+            <div class="jj-social-media">
+              <div class="jj-bg-icon"><a href="#"><i class='bx bxl-instagram'></i></a><span></span></div>
+              <div class="jj-bg-icon"><a href="#"><i class='bx bxl-github'></i></a><span></span></div>
+              <div class="jj-bg-icon"><a href="#"><i class='bx bxl-whatsapp'></i></a><span></span></div>
+              <div class="jj-bg-icon"><a href="#"><i class='bx bxl-facebook'></i></a><span></span></div>
+            </div>
+          </div>
+          <div class="img-hero fly-in" data-delay="300">
+            <img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/saddam.png" alt="saddam - Jeevan Jyoti">
+            <div class="rotate-text">
+              <div class="text"><p>JEEVAN JYOTI GRAMIN BIDHYUT * JANAKI-2, KHAIRENI KAILALI *&nbsp;</p></div>
+              <span><i></i></span>
+            </div>
+          </div>
+        </section>
+        <section class="jj-about" id="about">
+          <div class="img-hero fly-in" data-delay="200">
+            <img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/saddam.png" alt="saddam">
+            <div class="rotate-text">
+              <div class="text"><p>JEEVAN JYOTI GRAMIN BIDHYUT  * JANAKI-2, KHAIRENI KAILALI *&nbsp;</p></div>
+              <span><i></i></span>
+            </div>
+          </div>
+        <div class="jj-about-content fly-in" data-delay="400">
+          <div class="services-container">
+                <div class="header-decoration">
+                    <h1>⚡ जीवन ज्योती <br>ग्रामीण विद्युत सहकारी संस्था लिमिटेड</h1>
+                  <br>
+                    <div class="sanstha-tag">स्थापना : २०६३ | जानकी–२, खैरेनी (कैलाली)</div>
+                    <div class="vakra-rekha"></div>
+                </div>
+            <div class="jj-portfolio-gallery res" style="margin-bottom: 2rem; justify-content:center;">
+              <div class="jj-portfolio-box fly-in" data-delay="100" style="max-width:450px;">
+                <div class="jj-portfolio-content">
+                  <span>Get In Touch</span>
+                  <h3>सुझाव छ?</h3>
+                  <br>
+                  <a href="#contact" class="jj-btn">सम्पर्क गर्नुहोस्</a>
+                </div>
+                <div class="jj-portfolio-img">
+                  <img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/support.png" alt="">
+                </div>
+              </div>
+            </div>
+         </div>
+                <div class="intro-verse">
+                    🌱 ग्रामीण उज्यालोको अभियान : २०६३ सालमा जन्मेको जीवन ज्योती सहकारीले बिजुली, मल र बिकासको धारा बगाइरहेको छ ।
+                </div>
+            <div class="jj-about-btn fly-in" data-delay="500">
+              <button class="active">दिगो ऊर्जा</button>
+              <button>समुदाय-केन्द्रित</button>
+              <button>भरपर्दो सेवा</button>
+            </div>
+            <div class="jj-content-btn">
+              <div class="jj-content fly-in" data-delay="600"><div class="text-box"><p>हामी नवीकरणीय ऊर्जा स्रोतहरूमा केन्द्रित छौं जसले पर्यावरणमैत्री विद्युत समाधान प्रदान गर्दछ।</p></div></div>
+              <div class="jj-content fly-in" data-delay="700"><div class="text-box"><p>हाम्रो सहकारी मोडेलले स्थानीय समुदायहरूलाई उनीहरूको ऊर्जा आवश्यकताहरू व्यवस्थापन गर्न सशक्त बनाउँछ।</p></div></div>
+              <div class="jj-content fly-in" data-delay="800"><div class="text-box"><p>हामी ग्रामीण घरपरिवारहरूलाई निरन्तर र सस्तो विद्युत आपूर्ति सुनिश्चित गर्दछौं।</p></div></div>
+            </div>
+          </div>
+          <!-- पृष्ठभूमि परिच्छेदहरुको सूची (विस्तृत) -->
+            <div class="grid-para">
+                <!-- परिच्छेद १ – स्थापना र उद्देश्य -->
+                    <div class="paragraph-card">
+                        <h2><span>१</span> स्थापना काल : २०६३ को दूरदृष्टि</h2>
+                        <p>वि.सं. २०६३ मा कैलालीको जानकी गाउँपालिका–२ खैरेनीमा <strong>जीवन ज्योती ग्रामीण विद्युत सहकारी संस्था लिमिटेड</strong> को स्थापना भयो । ग्रामीण विद्युतीकरण र आत्मनिर्भर स्थानीय अर्थतन्त्रको परिकल्पना बोकेर उदाएको यो सहकारी आज ऊर्जा तथा कृषि आपूर्तिको मेरुदण्ड बनेको छ । स्थानीय सक्रियता र सहभागिताको जगमा उभिएको संस्थाले सुरुवाती दिनदेखि नै उपभोक्तालाई सस्तो, भरपर्दो विद्युत् र कृषि सामग्री उपलब्ध गराउने लक्ष्य लिएको थियो ।</p>
+                    </div>
         
-        .input-error {
-            border-color: #e6006d !important;
-        }
-
-        @keyframes moveText {
-            0%, 10%, 100% { background-position: -24rem 0; }
-            65%, 85% { background-position: 0rem 0; }
-        }
-
-        @keyframes moveCursorText {
-            0%, 10%, 100% { width: 0; }
-            65%, 78%, 85% { width: 100%; opacity: 1; }
-            75%, 85% { opacity: 0; }
-        }
-
-        @keyframes animate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes rotateText {
-            0% { transform: rotate(360deg); }
-            100% { transform: rotate(0deg); }
-        }
-
-        @keyframes progress {
-            to { stroke-dashoffset: var(--target); }
-        }
-
-        @keyframes floatImage {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-22px); }
-            100% { transform: translateY(0); }
-        }
-
-        @media (max-width: 1200px) {
-            html { font-size: 95%; }
-        }
-
-        @media (max-width: 991px) {
-            header, section, footer { padding-left: 3%; padding-right: 3%; }
-            .home, .portfolio-box { flex-direction: column-reverse; }
-            .about, .contactSkills { flex-direction: column; }
-            .about .about-img .aboutHero { width: 100%; }
-            .proposal img { width: 52vw; }
-            .portfolio-img img { width: 100%; height: 100%; }
-            .portfolio-gallery { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-            .img-hero { margin-top: 3rem; }
-        }
-
-        @media (max-width: 768px) {
-            .proposal { display: none; }
-            .menu-icon .bar, .menu-icon::after, .menu-icon::before { 
-                display: block; 
-            }
-            ul.navlist {
-                position: absolute;
-                top: -1000px;
-                transition: all .3s ease;
-                width: 100%;
-                text-align: center;
-                display: block;
-                background: var(--gradient-white-bg);
-                left: 0;
-                border-top: 2px solid rgba(248, 202, 202, .7);
-            }
-            ul.navlist a { 
-                font-size: 1.5rem; 
-                margin: 1rem 0; 
-            }
-            .navlist.active { 
-                top: 100%; 
-            }
-            .overlay {
-                width: 100vw;
-                height: 100vh;
-                top: 0;
-                left: 0;
-                position: fixed;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 8;
-                opacity: 0;
-                transition: .3s;
-                pointer-events: none;
-            }
-            body.open .overlay { 
-                opacity: 1; 
-                pointer-events: auto; 
-            }
-            .btn { 
-                padding: 10px; 
-            }
-            .home { 
-                gap: 0; 
-            }
-            .fillter-buttons button { 
-                padding: 10px; 
-                font-size: .8rem; 
-            }
-            .hidden-info { 
-                max-width: 85vw; 
-                padding: 1.5rem; 
-            }
-            .hidden-info h4 { 
-                font-size: 1.2rem; 
-            }
-            .hidden-info p { 
-                font-size: 0.9rem; 
-            }
-            .input-box textarea {
-                min-height: 120px;
-            }
-            .logo-circle {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
-            }
-            header .logo {
-                font-size: 1.5rem;
-            }
-        }
-
- @media (max-width: 530px) {            
-    html{
-        font-size: 80%;
-    }
-    section{
-        padding: 50px 3%;
-    }
-    .contact-info form .input-box{
-        display: block;
-    }
-    .input-box input {
-        width: 100%;
-    }
-    .rotate-text{
-        display: none;
-    }
-    .img-hero img{
-        width: 100%;
-    }
-    .text-animate{
-        width: 23.8rem;
-    }
-    .btn-box{
-        width: 266px;
-        margin-bottom: 3rem;
-    }
-    .about-btn button{
-        padding: 10px 15px;
-    }
-    .fillter-buttons{
-        display: grid;
-        grid-gap: 1rem;
-    }
-    .fillter-buttons button{
-        width: 100%;
-        padding: 13px;
-    }
-    .hidden-info { max-width: 90vw; padding: 0.5rem; }
-    .hidden-info h4 { font-size: 2rem; }
-    .hidden-info p { font-size: 1.5rem; }
-    .logo-circle {
-        width: 30px;
-        height: 30px;
-        font-size: 0.9rem;
-    }
-    header .logo {
-        font-size: 1.3rem;
-    }
-}    
-    </style>
-</head>
-<body>
-    <div class="overlay"></div>
-    <header>
-        <a href="#" class="logo">
-            <span class="logo-circle">JJ</span>
-            JEEVAN JYOTI
-        </a>
-        <ul class="navlist">
-            <li><a href="#home" class="active text-gray-700 hover:text-green-600">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="right-header">
-            <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="btn">Let's chat <i class='bx bx-message-dots'></i></a>
-            <div class="menu-icon">
-                <div class="bar"></div>
-            </div>
-        </div>
-    </header>
-    
-    <section class="home" id="home">
-        <div class="hero-info">
-            <h3>Welcome to Jeevan Jyoti</h3>
-            <h1>Empowering Rural Communities with Electricity</h1>
-            <div class="text-animate">
-                <h2>Rural Electricity Board</h2>
-            </div>
-            <p>Jeevan Jyoti Gramin Bidhyut Sahakari Sastha Ltd. is dedicated to providing reliable, affordable, and sustainable electricity to rural areas, fostering growth and development.</p>
-            <div class="btn-box">
-                <a href="#" onclick="showFormPopup()" class="btn">Check Bill <i class='bx bx-right-arrow-alt'></i></a>
-                <a href="#about" class="btn d-CV">Learn More<i class='bx bx-plug'></i></a>
-            </div>
-            <div class="social-media">
-                <div class="bg-icon">
-                    <a href="#"><i class='bx bxl-instagram'></i></a>
-                    <span></span>
-                </div>
-                <div class="bg-icon">
-                    <a href="#"><i class='bx bxl-github'></i></a>
-                    <span></span>
-                </div>
-                <div class="bg-icon">
-                    <a href="#"><i class='bx bxl-twitter'></i></a>
-                    <span></span>
-                </div>
-                <div class="bg-icon">
-                    <a href="#"><i class='bx bxl-facebook'></i></a>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-        <div class="img-hero">
-            <img src="img/saddam.png" alt="">
-            <div class="rotate-text">
-                <div class="text">
-                    <p>JEEVAN JYOTI GRAMIN BIDHYUT JANAKI-2, KHAIRENI KAILALI</p>
-                </div>
-                <span><i></i></span>
-            </div>
-        </div>
-    </section>
-    <section class="about" id="about">
-        <div class="img-hero">
-            <img src="img/saddam.png" alt="">
-            <div class="rotate-text">
-                <div class="text">
-                   
-                </div>
-                <span><i></i></span>
-            </div>
-        </div>
-        <div class="about-content">
-            <h2 class="heading">About Us</h2>
-            <h3>Mobile no. 9823397879 | 9866244760</h3>
-            <p>Jeevan Jyoti Gramin Bidhyut Sahakari Sastha Ltd. is a cooperative society established to provide electricity to rural communities. Our mission is to bridge the energy gap, promote sustainable development, and enhance the quality of life in rural areas.</p>
-            <div class="about-btn">
-                <button class="active">Sustainable Energy</button>
-                <button>Community-Driven</button>
-                <button>Reliable Services</button>
-            </div>
-            <div class="content-btn">
-                <div class="content">
-                    <div class="text-box">
-                        <p class="text-gray-600 mt-2">We focus on renewable energy sources to provide eco-friendly electricity solutions.</p>
+                <!-- परिच्छेद २ – ऊर्जा साझेदारी (NEA बाट विद्युत खरीद) -->
+                    <div class="paragraph-card">
+                        <h2><span>२</span> ऊर्जा साझेदार : नेपाल विद्युत प्राधिकरण</h2>
+                        <p>संस्थाको मूल कार्यक्षेत्र ऊर्जा वितरण हो । <strong>नेपाल विद्युत प्राधिकरण (NEA)</strong> सँगको औपचारिक सम्झौता अनुरूप जीवन ज्योतीले थोक बिजुली खरिद गरी आफ्ना सदस्य/उपभोक्तालाई वितरण गर्दै आएको छ । प्राधिकरणको प्रसारण लाइनबाट लिइएको विद्युत्लाई सहकारीले स्थानीय सञ्जालमार्फत हरदानी, खैरेनी, खर्गौली, परागीपुर क्षेत्रमा पुर्याउँछ । यसले प्राधिकरण र समुदायबीचको सेतुको काम गर्दै गाउँ–गाउँमा उज्यालो मात्र होइन, उद्यमशीलताको पनि बिजौटा रोपेको छ ।</p>
                     </div>
-                </div>
-                <div class="content">
-                    <div class="text-box">
-                        <p class="text-gray-600 mt-2">Our cooperative model empowers local communities to manage their energy needs.</p>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="text-box">
-                        <p class="text-gray-600 mt-2">We ensure consistent and affordable electricity supply to rural households.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="services" id="services">
-        <div class="main-text">
-            <h2 class="heading">Our Services</h2>
-            <span>We offer a range of services to ensure rural communities have access to reliable electricity.</span>
-        </div>
-        <div class="allServices">
-            <div class="servicesItem">
-                <div class="icon-services">
-                    <i class='bx bx-plug'></i>
-                    <span></span>
-                </div>
-                <h3>Electricity Distribution</h3>
-                <p>Providing consistent power supply to rural households and businesses.</p>
-                <a href="#" class="readMore" data-info-id="info1">Explore More</a>
-                <div id="info1" class="hidden-info">
-                    <h4>Electricity Distribution</h4>
-                    <p>We ensure a steady and reliable power supply to rural households and businesses, supporting daily activities and economic growth.</p>
-                </div>
-            </div>
-            <div class="servicesItem">
-                <div class="icon-services">
-                    <i class='bx bx-sun'></i>
-                    <span></span>
-                </div>
-                <h3>Energy Solutions</h3>
-                <p>Implementing energy panels and microgrids for sustainable energy.</p>
-                <a href="#" class="readMore" data-info-id="info2">Explore More</a>
-                <div id="info2" class="hidden-info">
-                    <h4>Energy Solutions</h4>
-                    <p>Our renewable energy solutions, including energy panels and microgrids, provide sustainable power to remote areas.</p>
-                </div>
-            </div>
-            <div class="servicesItem">
-                <div class="icon-services">
-                    <i class='bx bx-wrench'></i>
-                    <span></span>
-                </div>
-                <h3>Maintenance Services</h3>
-                <p>Regular upkeep of electrical infrastructure for uninterrupted service.</p>
-                <a href="#" class="readMore" data-info-id="info3">Explore More</a>
-                <div id="info3" class="hidden-info">
-                    <h4>Maintenance Services</h4>
-                    <p>We perform routine maintenance on electrical infrastructure to ensure uninterrupted and safe power supply.</p>
-                </div>
-            </div>
-            <div class="servicesItem">
-                <div class="icon-services">
-                    <i class='bx bx-bulb'></i>
-                    <span></span>
-                </div>
-                <h3>Energy Education</h3>
-                <p>Training communities on energy conservation and safety practices.</p>
-                <a href="#" class="readMore" data-info-id="info4">Explore More</a>
-                <div id="info4" class="hidden-info">
-                    <h4>Energy Education</h4>
-                    <p>We educate communities on energy conservation techniques and safety practices to promote efficient power usage.</p>
-                </div>
-            </div>
-        </div>
-        <div class="proposal">
-            <div class="text-box">
-                <span>Get In Touch</span>
-                <h3>Have a suggestion or feedback?</h3>
-                <a href="#contact" class="btn">Contact Us</a>
-            </div>
-            <img src="img/support.png" class="first">
-        </div>
-        <div class="showcase">
-            <img src="img/shapes/ring.png" class="ring">
-            <img src="img/shapes/circle.png" class="circle">
-            <img src="img/shapes/circle.png" class="circle2">
-            <img src="img/shapes/circle.png" class="circle3">
-            <img src="img/shapes/half-ring.png" class="half-ring">
-        </div>
-    </section>
-    <section class="portfolio" id="portfolio">
-        <div class="main-text">
-            <h2 class="heading">Our Projects</h2>
-            <span>Explore our initiatives to electrify rural communities.</span>
-            <div class="portfolio-box mix">
-                <div class="portfolio-content">
-                    <h3>प्रबन्धक</h3>
-                    <p>श्री विश्व प्रकाश जोशी</p>
-                    <p>९८६६२४४७६०</p>
-                    <a href="#" class="readMore" data-info-id="info5">Explore More</a>
-                    <div id="info5" class="hidden-info">
-                        <h4>प्रबन्धक</h4>
-                        <p>श्री विश्व प्रकाश जोशी leads our cooperative with dedication, ensuring efficient management and reliable electricity distribution.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img imge">
-                    <img src="img/support.png" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="fillter-buttons">
-            <button class="button mixitup-control-active" data-filter="all">सबै सदस्य</button>
-            <button class="button" data-filter=".web">कार्य समिति</button>
-            <button class="button" data-filter=".uiux">लेखा समिति</button>
-            <button class="button" data-filter=".branding">सल्लाहकार समिति</button>
-            <button class="button" data-filter=".other">पोलबत्ति समिति</button>
-        </div>
-        <div class="portfolio-gallery">
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>अध्यक्ष</h3>
-                    <p>श्री दिपक देउवा</p>
-                    <p>९८६८८२६९७५</p>
-                    <a href="#" class="readMore" data-info-id="info6">Explore More</a>
-                    <div id="info6" class="hidden-info">
-                        <h4>अध्यक्ष</h4>
-                        <p>श्री दिपक देउवा provides strategic leadership to drive our mission of rural electrification.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/1.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix uiux">
-                <div class="portfolio-content">
-                    <h3>संयोजक</h3>
-                    <p>श्री कालीराम चौधरी</p>
-                    <p>९८४८५००३४७</p>
-                    <a href="#" class="readMore" data-info-id="info7">Explore More</a>
-                    <div id="info7" class="hidden-info">
-                        <h4>संयोजक</h4>
-                        <p>श्री कालीराम चौधरी coordinates efforts to ensure effective project implementation.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/10.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>उपाध्यक्ष</h3>
-                    <p>श्री मायाराम चौधरी</p>
-                    <p>९८२५६१२७७२</p>
-                    <a href="#" class="readMore" data-info-id="info8">Explore More</a>
-                    <div id="info8" class="hidden-info">
-                        <h4>उपाध्यक्ष</h4>
-                        <p>श्री मायाराम चौधरी supports the chairman in overseeing operations.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/2.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>सचिव</h3>
-                    <p>श्री विजय चौधरी</p>
-                    <p>९८४२८७२२५३</p>
-                    <a href="#" class="readMore" data-info-id="info9">Explore More</a>
-                    <div id="info9" class="hidden-info">
-                        <h4>सचिव</h4>
-                        <p>श्री विजय चौधरी manages administrative tasks and documentation.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/3.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix other">
-                <div class="portfolio-content">
-                    <h3>संयोजक</h3>
-                    <p>श्री मायाराम चौधरी</p>
-                    <p>९८२५६१२७७२</p>
-                    <a href="#" class="readMore" data-info-id="info10">Explore More</a>
-                    <div id="info10" class="hidden-info">
-                        <h4>संयोजक</h4>
-                        <p>श्री मायाराम चौधरी leads the pole light committee for infrastructure maintenance.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/2.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix branding">
-                <div class="portfolio-content">
-                    <h3>संयोजक</h3>
-                    <p>डम्मर बहादुर रावल</p>
-                    <p>९८०१७१८४२२</p>
-                    <a href="#" class="readMore" data-info-id="info11">Explore More</a>
-                    <div id="info11" class="hidden-info">
-                        <h4>संयोजक</h4>
-                        <p>डम्मर बहादुर रावल provides advisory support for strategic decisions.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/13.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>कोषाध्यक्ष</h3>
-                    <p>श्री मोहनमति चौधरी</p>
-                    <p>९८००६२६८६०</p>
-                    <a href="#" class="readMore" data-info-id="info12">Explore More</a>
-                    <div id="info12" class="hidden-info">
-                        <h4>कोषाध्यक्ष</h4>
-                        <p>श्री मोहनमति चौधरी oversees financial management and budgeting.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/4.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix other">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री विजय चौधरी</p>
-                    <p>९८४२८७२२५३</p>
-                    <a href="#" class="readMore" data-info-id="info13">Explore More</a>
-                    <div id="info13" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री विजय चौधरी contributes to the pole light committee's efforts.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/3.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix uiux">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>केदार चौधरी</p>
-                    <p>९८००००</p>
-                    <a href="#" class="readMore" data-info-id="info14">Explore More</a>
-                    <div id="info14" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>केदार चौधरी supports the accounting committee's operations.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/11.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री शान्ति कामी</p>
-                    <p>९८०००००</p>
-                    <a href="#" class="readMore" data-info-id="info15">Explore More</a>
-                    <div id="info15" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री शान्ति कामी actively participates in committee activities.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/5.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री लोक बहादुर रावल</p>
-                    <p>९८२२१२८४७५</p>
-                    <a href="#" class="readMore" data-info-id="info16">Explore More</a>
-                    <div id="info16" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री लोक बहादुर रावल supports rural electrification initiatives.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/6.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix branding">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>रुद्र चौधरी</p>
-                    <p>९८००००</p>
-                    <a href="#" class="readMore" data-info-id="info17">Explore More</a>
-                    <div id="info17" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>रुद्र चौधरी offers valuable insights as an advisory member.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/14.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix other">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री लोक बहादुर रावल</p>
-                    <p>९८२२१२८४७५</p>
-                    <a href="#" class="readMore" data-info-id="info18">Explore More</a>
-                    <div id="info18" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री लोक बहादुर रावल contributes to infrastructure projects.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/6.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री रहिश अलि जागा</p>
-                    <p>९८२१६४९७४५</p>
-                    <a href="#" class="readMore" data-info-id="info19">Explore More</a>
-                    <div id="info19" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री रहिश अलि जागा supports community-driven initiatives.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/7.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix uiux">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री शारदा सार्की</p>
-                    <p>९८००००</p>
-                    <a href="#" class="readMore" data-info-id="info20">Explore More</a>
-                    <div id="info20" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री शारदा सार्की aids in financial oversight.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/12.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री पर्बे चौलागाईं</p>
-                    <p>९८४८५८१९४३</p>
-                    <a href="#" class="readMore" data-info-id="info21">Explore More</a>
-                    <div id="info21" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री पर्बे चौलागाईं contributes to operational efficiency.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/8.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix web">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>श्री सरस्वती मल्ल</p>
-                    <p>९८०००००</p>
-                    <a href="#" class="readMore" data-info-id="info22">Explore More</a>
-                    <div id="info22" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>श्री सरस्वती मल्ल supports community engagement efforts.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/9.jpg" alt="">
-                </div>
-            </div>
-            <div class="portfolio-box mix branding">
-                <div class="portfolio-content">
-                    <h3>सदस्य</h3>
-                    <p>राम प्रसाद न्यौपाने</p>
-                    <p>९८००००</p>
-                    <a href="#" class="readMore" data-info-id="info23">Explore More</a>
-                    <div id="info23" class="hidden-info">
-                        <h4>सदस्य</h4>
-                        <p>राम प्रसाद न्यौपाने provides advisory support for long-term planning.</p>
-                    </div>
-                </div>
-                <div class="portfolio-img">
-                    <img src="img/portfolio/15.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-       <section class="down-box" id="contact">
-        <div class="contactSkills">
-            <div class="contact-info">
-                <div class="main-text">
-                    <h2 class="heading">Contact Us</h2>
-                </div>
-                <form id="contactForm">
-                    <div class="input-box">
-                       <input type="text" id="firstName" placeholder="First Name" required>
-                        <span class="error-message" id="firstNameError">First name is required</span>
-                    </div>
-                    <div class="input-box">
-                        <input type="text" id="lastName" placeholder="Last Name" required>
-                        <span class="error-message" id="lastNameError">Last name is required</span>
-                    </div>
-                    <div class="input-box">
-                        <input type="email" id="email" placeholder="Email" required>
-                        <span class="error-message" id="emailError">Valid email is required</span>
-                    </div>
-                    <div class="input-box">
-                        <input type="text" id="subject" placeholder="Subject" required>
-                        <span class="error-message" id="subjectError">Subject is required</span>
-                    </div>                 
-                    <div class="input-box">
-                        <label for="message" style="margin-bottom: 0.5rem; font-weight: 500;">Your Message</label>
-                        <textarea id="message" placeholder="Type your suggestion here..." required></textarea>
-                        <span class="error-message" id="messageError">Message is required</span>
-                    </div>
-                    
-                    <div class="formBtn">
-                        <button type="submit" class="btn">Send Message</button>
-                    </div>
-                </form>
-       </div>
-            <div class="skills">
-                <div class="container">
-                    <div class="skillBox">
-                        <div class="main-text">
-                            <h2 class="heading">Our Skills</h2>
-                            <span>Let Us Help You</span>
+        
+                <!-- परिच्छेद ३ – मल तथा कृषि सामग्री आपूर्ति -->
+                      <div class="paragraph-card">
+                          <h2><span>३</span> मल वितरण : साल्ट ट्रेडिङ् र कृषि सामग्री कम्पनी सँग सहकार्य</h2>
+                          <p>बिजुलीसँगै किसानका लागि जीवनरेखा हो – मल । यसै महसुस गर्दै जीवन ज्योतीले <strong>साल्ट ट्रेडिङ कर्पोरेशन</strong> र <strong>कृषि सामग्री कम्पनी लिमिटेड</strong> बाट रासायनिक मल (युरिया, डीएपी, पोटास) तथा अन्य कृषि सामग्री खरिद गरी सहुलियत दरमा सदस्य किसानलाई उपलब्ध गराउँदै आएको छ । यसले बिचौलियाको लगभग अन्त्य गरी कृषि उत्पादन वृद्धि र समयमै मल पुर्याउने कार्यमा ठोस योगदान दिएको छ । संस्थाले विकासका लागि कृषिलाई आधार मानेको छ ।</p>
+                          <ul class="bullet-vikas">
+                              <li><strong>⚡ साल्ट ट्रेडिङ् र कृषि सामग्री कम्पनीसँग:</strong> बीउ, विषादी र आधुनिक उपकरणमा सहज पहुँच,रासायनिक मलको नियमित आपूर्ति, मूल्य स्थिरता।</li>
+                          </ul>
+                      </div>
+        
+                <!-- परिच्छेद ४ – सेवा विस्तार र भौगोलिक क्षेत्र -->
+                    <div class="paragraph-card">
+                        <h2><span>४</span> फैलँदो सेवा क्षेत्र : लम्कीचूहा–७ देखि परागीपुर सम्म</h2>
+                        <p>प्रारम्भमा सीमित क्षेत्रमा केन्द्रित सहकारीको सेवा सञ्जाल अहिले फराकिलो भएको छ । संस्थाले हाल <strong>लम्कीचूहा–७ हरदानी, जानकी–२ खैरेनी, खर्गौली, परागीपुर</strong> लगायत आसपासका बस्तीहरूमा सेवा पुर्याइरहेको छ । सहकारीको प्रभावकारी विद्युत् वितरण प्रणाली र मल डिपोले यी क्षेत्रका हजारौं घरधुरी तथा कृषकलाई प्रत्यक्ष लाभान्वित गरेको छ ।</p>
+                        <div class="sewa-khetra">
+                            <h3>📍 सक्रिय सेवा उपलब्ध स्थान</h3>
+                            <div class="location-grid">
+                                <div>जानकी–२, खैरेनी</div>
+                              	<div>लम्कीचूहा–७, हरदानी</div>
+                                <div>जानकी–२,खर्गौली</div>
+                                <div>जानकी–२, परागीपुर</div>
+                                <div>जानकी गाउँपालिका आसपास</div>
+                            </div>
+                            <p style="margin-top: 18px; color: #fffbdb; font-size: 1.1rem;">✧ यी क्षेत्रहरूमा विद्युत् पूर्वाधार र मल वितरण केन्द्र सञ्चालनमा छन् ।</p>
                         </div>
                     </div>
-                </div>
+        
+                <!-- परिच्छेद ५ – विकास क्रम र भावी आयाम -->
+                      <div class="paragraph-card">
+                          <h2><span>५</span> बढ्दो विकास क्रम : उज्यालोतर्फको यात्रा</h2>
+                          <p>स्थापनाकालको सानो संरचनाबाट हालसम्म आइपुग्दा जीवन ज्योती सहकारीले विद्युत् गुणस्तर, नवीकरणीय ऊर्जा प्रवर्धन र कृषि आपूर्ति श्रृंखलामा उल्लेख्य प्रगति गरेको छ । नियमित रूपमा लाइन मर्मत, स्मार्ट मिटर प्रणालीतर्फ अग्रसरता, र किसानलाई समयमै मल पुर्याउन डिजिटल प्रणालीको परीक्षण जस्ता कार्यक्रम अघि बढाइरहेको छ । भौतिक पूर्वाधार मात्र होइन, संस्थागत सुशासन र सदस्य सेवामा सुधार गर्दै सहकारीले ग्रामीण विकासको नमुना बन्ने लक्ष्य लिएको छ । </p>
+                          <p>आगामी दिनमा सौर्य ऊर्जा, सिँचाइ सहकार्य र कृषि प्रशोधन केन्द्र स्थापना गर्ने योजना रहेकोले जीवन ज्योती ग्रामीण विद्युत सहकारी केवल एक वितरण संस्था नभएर समृद्धिको साझेदार बन्दै गएको छ ।</p>
+                      </div>
+              
+              <!-- संस्थाको परिचयात्मक सारांश (थप पंक्ति) -->
+            <div class="paragraph-card" style="justify-content:center">
+                <p style="font-size: 1.3rem; font-weight: 600; color: #1c501c;">💬 <em>“जीवन ज्योती ग्रामीण विद्युत सहकारी – स्थानीय स्रोत, सामूहिक प्रयास र दिगो विकासको उजेलो यात्रा”</em></p>
+              	<span style="font-size: 1.3rem; font-weight: 600; color: #1c501c;">⚡ NEA सँग विद्युत् खरिद सम्झौता  •  🌾 साल्ट ट्रेडिङ् / कृषि सामग्री कम्पनी मल आपूर्ति साझेदारी  •  📍 सेवा क्षेत्र : हरदानी, खैरेनी, खर्गौली, परागीपुर</span>
             </div>
+               </div>
+        </section>
+        <!-- SERVICES -->
+        <section class="services" id="services">
+             <div class="services-container">
+               <div class="services-header fly-in"><h1>⚡विद्युत सहकारी⚡</h1><div class="service-count">विशेष सेवाहरू</div> </div>
+            </div>
+          <div class="jj-allServices">
+             <div class="jj-servicesItem fly-in" data-delay="100">
+                <div class="jj-icon-services"><i class='bx bx-plug'></i><span></span></div><br><br>
+                <span class="service-category">⚡ विद्युत सेवा</span>
+                <h3 class="service-title">नयाँ विद्युत जडान सेवा</h3>
+                <p class="service-description">
+                  ग्रामीण क्षेत्रका घरधुरी, व्यवसाय तथा उद्योगहरूमा नयाँ विद्युत जडान सेवा सरल, छिटो र पारदर्शी तरिकाले उपलब्ध गराइन्छ।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> घरायसी जडान (सिंगल फेज)</li>
+                  <li><i class='bx bx-check-circle'></i> व्यवसायिक जडान (थ्री फेज)</li>
+                  <li><i class='bx bx-check-circle'></i> उद्योगिक जडान (उच्च क्षमता)</li>
+                  <li><i class='bx bx-check-circle'></i> सिँचाइ पम्प जडान</li>
+                </ul>
+                <div class="service-footer"><span class="service-price">नि:शुल्क परामर्श</span><a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a> </div>
+          </div>
+              <div class="jj-servicesItem fly-in" data-delay="200">
+                <div class="jj-icon-services">
+                  <i class='bx bx-rupee'></i><span></span></div><br><br>
+                <span class="service-category">💰 आर्थिक सेवा</span>
+                <h3 class="service-title">विद्युत महसुल संकलन सेवा</h3>
+                <p class="service-description">
+                  सहज र सरल तरिकाले विद्युत महसुल भुक्तानी गर्ने व्यवस्था। विभिन्न भुक्तानी माध्यमहरू उपलब्ध।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> नगद भुक्तानी (कार्यालयमा)</li>
+                  <li><i class='bx bx-check-circle'></i> अनलाइन भुक्तानी </li>
+                  <li><i class='bx bx-check-circle'></i> मोबाइल बैंकिङ</li>
+                  <li><i class='bx bx-check-circle'></i> घर-घरमा संकलन सेवा</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">सजिलो किस्ता</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+              <div class="jj-servicesItem fly-in" data-category="electricity" data-delay="300">
+                <div class="jj-icon-services">
+                  <i class='bx bx-bar-chart-alt-2'></i><span></span></div><br><br>
+                <span class="service-category">⚡ विद्युत सेवा</span>
+                <h3 class="service-title">मिटर रिडिङ तथा बिलिङ सेवा</h3>
+                <p class="service-description">
+                  नियमित मिटर रिडिङ, सटीक बिलिङ र समयमै विद्युत महसुल वितरण सेवा।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> डिजिटल मिटर रिडिङ</li>
+                  <li><i class='bx bx-check-circle'></i> एसएमएस बिल सूचना</li>
+                  <li><i class='bx bx-check-circle'></i> अनलाइन बिल उपलब्ध</li>
+                  <li><i class='bx bx-check-circle'></i> मासिक उपभोग विवरण</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">नि:शुल्क</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+              <div class="jj-servicesItem fly-in" data-category="maintenance" data-delay="400">
+                <div class="jj-icon-services">
+                  <i class='bx bx-wrench'></i><span></span></div><br><br>
+                <span class="service-category">🔧 मर्मत सम्भार</span>
+                <h3 class="service-title">लाइन मर्मत तथा स्तरोन्नति सेवा</h3>
+                <p class="service-description">
+                  विद्युत लाइनमा आएको समस्या तत्काल समाधान, नियमित मर्मत र आवश्यक स्तरोन्नति।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> आपतकालीन मर्मत (२४/७)</li>
+                  <li><i class='bx bx-check-circle'></i> नियमित अनुगमन</li>
+                  <li><i class='bx bx-check-circle'></i> पोल तथा ट्रान्सफर्मर मर्मत</li>
+                  <li><i class='bx bx-check-circle'></i> भोल्टेज स्थिरीकरण</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">२४/७ सेवा</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+              <div class="jj-servicesItem fly-in" data-category="training" data-delay="600">
+                <div class="jj-icon-services">
+                  <i class='bx bx-shield-quarter'></i><span></span></div><br><br>
+                <span class="service-category">📚 तालिम तथा शिक्षा</span>
+                <h3 class="service-title">विद्युत सुरक्षा तालिम</h3>
+                <p class="service-description">
+                  विद्युत दुर्घटना रोकथाम, सुरक्षित प्रयोग र प्राथमिक उपचार सम्बन्धी तालिम।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> विद्युत सुरक्षा सचेतना</li>
+                  <li><i class='bx bx-check-circle'></i> प्राथमिक उपचार तालिम</li>
+                  <li><i class='bx bx-check-circle'></i> आगलागी नियन्त्रण</li>
+                  <li><i class='bx bx-check-circle'></i> बालबालिकाका लागि विशेष</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">नि:शुल्क</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+              <div class="jj-servicesItem fly-in" data-category="training" data-delay="700">
+                <div class="jj-icon-services">
+                  <i class='bx bx-leaf'></i><span></span></div><br><br>
+                <span class="service-category">📚 तालिम तथा शिक्षा</span>
+                <h3 class="service-title">ऊर्जा दक्षता परामर्श सेवा</h3>
+                <p class="service-description">
+                  विद्युत खपत कम गर्ने उपाय, ऊर्जा दक्ष उपकरण र बचत सुझावहरू।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> ऊर्जा अडिट सेवा</li>
+                  <li><i class='bx bx-check-circle'></i> एलईडी बत्ती प्रवर्द्धन</li>
+                  <li><i class='bx bx-check-circle'></i> स्टार रेटिङ उपकरण</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">नि:शुल्क परामर्श</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+                <div class="jj-servicesItem fly-in" data-delay="900">
+                <div class="jj-icon-services">
+                  <i class='bx bx-cylinder'></i><span></span></div><br><br>
+                <span class="service-category">🔧 मर्मत सम्भार</span>
+                <h3 class="service-title">ट्रान्सफर्मर मर्मत सेवा</h3>
+                <p class="service-description">
+                  ट्रान्सफर्मर मर्मत, तेल परिवर्तन र नियमित परीक्षण सेवा।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> ट्रान्सफर्मर मर्मत</li>
+                  <li><i class='bx bx-check-circle'></i> तेल परीक्षण तथा परिवर्तन</li>
+                  <li><i class='bx bx-check-circle'></i> क्षमता परीक्षण</li>
+                  <li><i class='bx bx-check-circle'></i> आकस्मिक प्रतिस्थापन</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">तत्काल सेवा</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+               <div class="jj-servicesItem fly-in" data-category="electricity" data-delay="1100">
+                <div class="jj-icon-services">
+                  <i class='bx bx-headphone'></i><span></span></div><br><br>
+                <span class="service-category">⚡ विद्युत सेवा</span>
+                <h3 class="service-title">गुनासो सुनुवाइ सेवा</h3>
+                <p class="service-description">
+                  उपभोक्ताका गुनासो, सुझाव र समस्या समाधानका लागि विशेष सेल।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> टोल फ्री नम्बर</li>
+                  <li><i class='bx bx-check-circle'></i> गुनासो केन्द्र</li>
+                  <li><i class='bx bx-check-circle'></i> अनलाइन गुनासो दर्ता</li>
+                  <li><i class='bx bx-check-circle'></i> २४ घण्टाभित्र समाधान</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">२४/७ सेवा</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+              <div class="jj-servicesItem fly-in" data-category="maintenance" data-delay="1300">
+                <div class="jj-icon-services">
+                  <i class='bx bx-alarm-exclamation'></i><span></span></div><br><br>
+                <span class="service-category">🔧 मर्मत सम्भार</span>
+                <h3 class="service-title">आपतकालीन विद्युत सेवा</h3>
+                <p class="service-description">
+                  राति, बिदाको दिन तथा आपतकालीन अवस्थामा तत्काल विद्युत सेवा उपलब्ध।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> २४/७ हटलाइन: ९८२३३९७८७९</li>
+                  <li><i class='bx bx-check-circle'></i> आधा घण्टाभित्र सेवा</li>
+                  <li><i class='bx bx-check-circle'></i> आकस्मिक जेनेरेटर</li>
+                  <li><i class='bx bx-check-circle'></i> निःशुल्क आपतकालीन सेवा</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">तत्काल सेवा</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
+              <div class="jj-servicesItem fly-in" data-category="electricity" data-delay="1400">
+                <div class="jj-icon-services">
+                  <i class='bx bx-group'></i><span></span></div><br><br>
+                <span class="service-category">⚡ विद्युत सेवा</span>
+                <h3 class="service-title">सामुदायिक विद्युतीकरण परियोजना</h3>
+                <p class="service-description">
+                  टोल, वडा तथा गाउँ स्तरमा सामूहिक विद्युतीकरण परियोजना सञ्चालन।
+                </p>
+                <ul class="service-features">
+                  <li><i class='bx bx-check-circle'></i> सडक बत्ती जडान</li>
+                  <li><i class='bx bx-check-circle'></i> सार्वजनिक स्थल विद्युतीकरण</li>
+                  <li><i class='bx bx-check-circle'></i> विद्यालय विद्युतीकरण</li>
+                </ul>
+                <div class="service-footer">
+                  <span class="service-price">सामूहिक सेवा</span>
+                  <a href="https://wa.me/qr/XRKUSGUNJ3T4J1" target="_blank" class="service-link">थप जानकारी <i class='bx bx-message-dots'></i></a>
+                </div>
+              </div>
         </div>
-    </section>
-    <footer>
-        <p>Copyright © 2025 by Jeevan Jyoti Gramin Bidhyut Sahakari Sastha Ltd. | All Rights Reserved.</p>
-    </footer>
-    <div id="progress">
-        <span id="progress-value">
-            <i class='bx bxs-chevrons-up'></i>
-        </span>
-    </div>
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
-    <script>
-    // Enhanced Contact Form Submission
-        const contactForm = document.getElementById('contactForm');
-        const whatsappNumber = '9823397879';
-        const emailAddress = 'joshivishwaprakash@gmail.com';
+          <div class="main-text fly-in"><h2 class="heading">Our Services</h2><span>We offer a range of services to ensure rural communities have access to reliable electricity.</span></div>
+          <div class="jj-allServices">
+            <div class="jj-servicesItem fly-in" data-delay="100">
+              <div class="jj-icon-services"><i class='bx bx-plug'></i><span></span></div>
+              <h3>Electricity Distribution</h3>
+              <p>Providing consistent power supply to rural households and businesses.</p> 
+            <a href="#" class="jj-readMore" data-info-id="info1">Explore More</a>
+                <div id="info1" class="jj-hidden-info"><h4>Electricity Distribution</h4><p>We ensure a steady and reliable power supply.</p></div>
+            </div>
+            <div class="jj-servicesItem fly-in" data-delay="200"><div class="jj-icon-services"><i class='bx bx-sun'></i><span></span></div><h3>Energy Solutions</h3><p>Implementing solar panels and microgrids for sustainable energy.</p><a href="#" class="jj-readMore" data-info-id="info2">Explore More</a><div id="info2" class="jj-hidden-info"><h4>Energy Solutions</h4><p>Renewable energy for remote areas.</p></div></div>
+            
+            <div class="jj-servicesItem fly-in" data-delay="300"><div class="jj-icon-services"><i class='bx bx-wrench'></i><span></span></div><h3>Maintenance Services</h3><p>Regular upkeep of electrical infrastructure for uninterrupted service.</p><a href="#" class="jj-readMore" data-info-id="info3">Explore More</a><div id="info3" class="jj-hidden-info"><h4>Maintenance Services</h4><p>Routine maintenance for safe supply.</p></div></div>
+            
+            <div class="jj-servicesItem fly-in" data-delay="400"><div class="jj-icon-services"><i class='bx bx-bulb'></i><span></span></div><h3>Energy Education</h3><p>Training communities on energy conservation and safety practices.</p><a href="#" class="jj-readMore" data-info-id="info4">Explore More</a><div id="info4" class="jj-hidden-info"><h4>Energy Education</h4><p>Conservation and safety training.</p></div></div>
+        </section>
+        <section class="portfolio" id="portfolio">
+          <div class="main-text fly-in"><h2 class="heading">Our Projects</h2><span>Explore our initiatives to electrify rural communities.</span></div>
+          <!-- manager card - fixed without overlay -->
+          <div class="jj-portfolio-gallery res" style="margin-bottom: 2rem; justify-content:center;">
+            <div class="jj-portfolio-box fly-in" style="max-width:450px;" data-delay="100">
+              <div class="jj-portfolio-content">
+                <h3>प्रबन्धक</h3>
+                <p>श्री विश्व प्रकाश जोशी</p>
+                <p>९८६६२४४७६०</p>
+                <a href="#" class="jj-readMore" data-info-id="info5">Explore More</a><div id="info5" class="jj-hidden-info"><h4>प्रबन्धक</h4><p>श्री विश्व प्रकाश जोशी leads with dedication.</p></div></div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/support.png" alt=""></div>
+            </div>
+          </div>
+          <div class="jj-fillter-buttons" id="filter-button-container">
+            <button class="filter-btn active-filter" data-filter="all"><i class='bx bx-user'></i> सबै सदस्य</button>
+            <button class="filter-btn" data-filter=".web">⚙️ कार्य समिति</button>
+            <button class="filter-btn" data-filter=".uiux">📊 लेखा समिति</button>
+            <button class="filter-btn" data-filter=".branding">🤝 सल्लाहकार समिति</button>
+            <button class="filter-btn" data-filter=".other">💡 पोलबत्ति समिति</button>
+          </div>
+          <div class="jj-portfolio-gallery" id="portfolio-gallery">
+            <!-- कार्य समिति (web) -->
+            <div class="jj-portfolio-box mix web fly-in" data-delay="100">
+              <div class="jj-portfolio-content">
+                <h3>अध्यक्ष</h3>
+                <p>श्री दिपक देउवा</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८६८८२६९७५</p>
+                <a href="#" class="jj-readMore" data-info-id="info6">Explore More</a>
+              <div id="info6" class="jj-hidden-info">
+                 <h4>अध्यक्ष, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठकको अध्यक्षता गर्ने, संस्थाको नीति तथा कार्यक्रम निर्धारण गर्ने, प्रमुख कार्यकारीको रुपमा संस्थाको प्रतिनिधित्व गर्ने, र संस्थाको दीर्घकालीन योजना निर्माणमा नेतृत्व प्रदान गर्ने। वार्षिक बजेट तथा कार्यक्रम स्वीकृत गराउने र समग्र संस्थाको सञ्चालन तथा व्यवस्थापनको अनुगमन गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/deepak.deuba.37" target="_blank" title="Facebook"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank" title="Instagram"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779868826975" target="_blank" title="WhatsApp"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                </div></div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/1.jpg" alt="अध्यक्ष"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="200">
+              <div class="jj-portfolio-content">
+                <h3>उपाध्यक्ष</h3>
+                <p>श्री मायाराम चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८२५६१२७७२</p>
+                <a href="#" class="jj-readMore" data-info-id="info8">Explore More</a>
+              <div id="info8" class="jj-hidden-info">
+                 <h4>उपाध्यक्ष, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> अध्यक्षको अनुपस्थितिमा अध्यक्षको सम्पूर्ण कार्यभार सम्हाल्ने, संस्थाका विभिन्न समिति तथा उपसमितिहरूको समन्वय गर्ने, सदस्यहरूबीच एकता कायम गराउने, र अध्यक्षलाई संस्थाको दैनिक प्रशासन तथा कार्यक्रम सञ्चालनमा सहयोग पुर्याउने। विशेष परियोजनाहरूको अनुगमन तथा मूल्यांकन गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779825612772" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/2.jpg" alt="उपाध्यक्ष"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="300">
+              <div class="jj-portfolio-content">
+                <h3>सचिव</h3>
+                <p>श्री विजय चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८४२८७२२५३</p>
+                <a href="#" class="jj-readMore" data-info-id="info9">Explore More</a>
+              <div id="info9" class="jj-hidden-info">
+                 <h4>सचिव, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठक बोलाउने, बैठकको कार्यसूची तय गर्ने, बैठकको कार्यवृत्त तयार गरी संरक्षण गर्ने, संस्थाको अभिलेख तथा कागजातहरू व्यवस्थित गर्ने, पत्राचार तथा सञ्चारको जिम्मेवारी लिने, र वार्षिक प्रतिवेदन तयार गर्ने। सदस्यहरूको विवरण अद्यावधिक राख्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/bijay.chaudhary.3323457" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779842872253" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/3.jpg" alt="सचिव"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="400">
+              <div class="jj-portfolio-content">
+                <h3>कोषाध्यक्ष</h3>
+                <p>श्री मोहनमति चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८००६२६८६०</p>
+                <a href="#" class="jj-readMore" data-info-id="info10">Explore More</a>
+              <div id="info10" class="jj-hidden-info">
+                 <h4>कोषाध्यक्ष, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> संस्थाको आर्थिक कारोबारको अभिलेख राख्ने, आय-व्ययको विवरण तयार गर्ने, बजेट निर्माण तथा कार्यान्वयनमा सहयोग गर्ने, चेक हस्ताक्षरको जिम्मेवारी लिने (अन्य पदाधिकारीसँग संयुक्त रुपमा), र वार्षिक आर्थिक प्रतिवेदन तयार गरी लेखापरीक्षण गराउने। नियमित रुपमा आर्थिक विवरण सार्वजनिक गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/monika.chaudhary.158136" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779800626860" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/4.jpg" alt="कोषाध्यक्ष"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="500">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री शान्ति कामी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८२५६०८०८५</p>
+                <a href="#" class="jj-readMore" data-info-id="info11">Explore More</a>
+              <div id="info11" class="jj-hidden-info">
+                 <h4>सदस्य, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठकमा सहभागी भई निर्णय प्रक्रियामा योगदान पुर्याउने, विभिन्न उपसमिति तथा कार्यदलमा रहेर कार्य गर्ने, संस्थाका कार्यक्रम तथा परियोजनाहरूमा सक्रिय सहभागिता जनाई कार्यान्वयनमा सहयोग गर्ने, र समुदाय स्तरमा संस्थाको प्रतिनिधित्व गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/shanta.bc.481144" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779825608085" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/5.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="600">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री लोक बहादुर रावल</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८२२१२८४७५</p>
+                <a href="#" class="jj-readMore" data-info-id="info12">Explore More</a>
+              <div id="info12" class="jj-hidden-info">
+                 <h4>सदस्य, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठकमा सहभागी भई निर्णय प्रक्रियामा योगदान पुर्याउने, विभिन्न उपसमिति तथा कार्यदलमा रहेर कार्य गर्ने, संस्थाका कार्यक्रम तथा परियोजनाहरूमा सक्रिय सहभागिता जनाई कार्यान्वयनमा सहयोग गर्ने, र समुदाय स्तरमा संस्थाको प्रतिनिधित्व गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779822128475" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/6.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="700">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री रहिश अलि जागा</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८२१६४९७४५</p>
+                <a href="#" class="jj-readMore" data-info-id="info13">Explore More</a>
+              <div id="info13" class="jj-hidden-info">
+                 <h4>सदस्य, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठकमा सहभागी भई निर्णय प्रक्रियामा योगदान पुर्याउने, विभिन्न उपसमिति तथा कार्यदलमा रहेर कार्य गर्ने, संस्थाका कार्यक्रम तथा परियोजनाहरूमा सक्रिय सहभागिता जनाई कार्यान्वयनमा सहयोग गर्ने, र समुदाय स्तरमा संस्थाको प्रतिनिधित्व गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779821649745" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/7.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="800">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री पर्बे चौलागाईं</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८४८५८१९४३</p>
+                <a href="#" class="jj-readMore" data-info-id="info14">Explore More</a>
+              <div id="info14" class="jj-hidden-info">
+                 <h4>सदस्य, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठकमा सहभागी भई निर्णय प्रक्रियामा योगदान पुर्याउने, विभिन्न उपसमिति तथा कार्यदलमा रहेर कार्य गर्ने, संस्थाका कार्यक्रम तथा परियोजनाहरूमा सक्रिय सहभागिता जनाई कार्यान्वयनमा सहयोग गर्ने, र समुदाय स्तरमा संस्थाको प्रतिनिधित्व गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/parbya.chaulagain" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779848581943" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/8.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix web fly-in" data-delay="900">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री सरस्वती मल्ल</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८४८६६३४९६</p>
+                <a href="#" class="jj-readMore" data-info-id="info15">Explore More</a>
+              <div id="info15" class="jj-hidden-info">
+                 <h4>सदस्य, कार्य समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> समितिको बैठकमा सहभागी भई निर्णय प्रक्रियामा योगदान पुर्याउने, विभिन्न उपसमिति तथा कार्यदलमा रहेर कार्य गर्ने, संस्थाका कार्यक्रम तथा परियोजनाहरूमा सक्रिय सहभागिता जनाई कार्यान्वयनमा सहयोग गर्ने, र समुदाय स्तरमा संस्थाको प्रतिनिधित्व गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/sarasvati.malla.675059" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779848663496" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/9.jpg" alt="सदस्य"></div>
+            </div>
+            <!-- लेखा समिति (uiux) -->
+            <div class="jj-portfolio-box mix uiux fly-in" data-delay="100">
+              <div class="jj-portfolio-content">
+                <h3>संयोजक</h3>
+                <p>श्री कालीराम चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८४८५००३४७</p>
+                <a href="#" class="jj-readMore" data-info-id="info7">Explore More</a>
+              <div id="info7" class="jj-hidden-info">
+                 <h4>संयोजक, लेखा समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> लेखा समितिको बैठकको अध्यक्षता गर्ने, संस्थाको आय-व्यय तथा आर्थिक कारोबारको नियमित लेखापरीक्षण गर्ने, आर्थिक अनियमितता रोक्न सुझाव दिने, लेखापरीक्षण प्रतिवेदन कार्य समितिमा पेश गर्ने, र आर्थिक पारदर्शिता कायम गर्न आवश्यक सिफारिस गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="https://www.facebook.com/kaliram.chaudhary.7796" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779848500347" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/10.jpg" alt="संयोजक"></div>
+            </div>
+            <div class="jj-portfolio-box mix uiux fly-in" data-delay="200">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री केदार चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८xxxxxxxx</p>
+               <a href="#" class="jj-readMore" data-info-id="info16">Explore More</a>
+              <div id="info16" class="jj-hidden-info">
+                 <h4>सदस्य, लेखा समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> लेखा समितिको बैठकमा सहभागी भई छलफलमा योगदान पुर्याउने, संस्थाको आर्थिक कारोबारको विस्तृत अध्ययन गरी लेखापरीक्षण कार्यमा सहयोग गर्ने, आवश्यक परेमा आर्थिक कागजातहरूको परीक्षण गर्ने, र समितिको प्रतिवेदन तयार गर्न सहयोग गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/11.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix uiux fly-in" data-delay="300">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री शारदा सार्की</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८xxxxxxxx</p>
+                <a href="#" class="jj-readMore" data-info-id="info17">Explore More</a>
+              <div id="info17" class="jj-hidden-info">
+                 <h4>सदस्य, लेखा समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> लेखा समितिको बैठकमा सहभागी भई छलफलमा योगदान पुर्याउने, संस्थाको आर्थिक कारोबारको विस्तृत अध्ययन गरी लेखापरीक्षण कार्यमा सहयोग गर्ने, आवश्यक परेमा आर्थिक कागजातहरूको परीक्षण गर्ने, र समितिको प्रतिवेदन तयार गर्न सहयोग गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/12.jpg" alt="सदस्य"></div>
+            </div>
+            <!-- पोलबत्ति समिति (other) -->
+            <div class="jj-portfolio-box mix other fly-in" data-delay="400">
+              <div class="jj-portfolio-content">
+                <h3>संयोजक</h3>
+                <p>श्री मायाराम चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८२५६१२७७२</p>
+                <a href="#" class="jj-readMore" data-info-id="info22">Explore More</a>
+              <div id="info22" class="jj-hidden-info">
+                 <h4>उपाध्यक्ष, पोलबत्ति समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> पोलबत्ति समितिको संयोजकको अनुपस्थितिमा कार्यभार सम्हाल्ने, विद्युत् महसुल संकलन तथा भुक्तानीको नियमित अनुगमन गर्ने, नयाँ विद्युत् जडान तथा मर्मतको लागि समन्वय गर्ने, र विद्युत् चुहावट नियन्त्रणमा सचेतना फैलाउने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779825612772" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/2.jpg" alt="संयोजक"></div>
+            </div>
+            <div class="jj-portfolio-box mix other fly-in" data-delay="500">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री विजय चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८४२८७२२५३</p>
+                <a href="#" class="jj-readMore" data-info-id="info18">Explore More</a>
+              <div id="info18" class="jj-hidden-info">
+                 <h4>सदस्य, पोलबत्ति समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> पोलबत्ति समितिको बैठकमा सहभागी हुने, विद्युत् लाइन मर्मत तथा स्तरोन्नतिको क्रममा आवश्यक जनशक्ति तथा सामग्री व्यवस्थापनमा सहयोग गर्ने, उपभोक्ताको गुनासो सुन्ने तथा समाधानको लागि पहल गर्ने, र मिटर रिडिङ तथा बिलिङ प्रक्रियामा सहयोग गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779842872253" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/3.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix other fly-in" data-delay="600">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री लोक बहादुर रावल</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८२२१२८४७५</p>
+                <a href="#" class="jj-readMore" data-info-id="info19">Explore More</a>
+              <div id="info19" class="jj-hidden-info">
+                 <h4>सदस्य, पोलबत्ति समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> पोलबत्ति समितिको बैठकमा सहभागी हुने, विद्युत् लाइन मर्मत तथा स्तरोन्नतिको क्रममा आवश्यक जनशक्ति तथा सामग्री व्यवस्थापनमा सहयोग गर्ने, उपभोक्ताको गुनासो सुन्ने तथा समाधानको लागि पहल गर्ने, र मिटर रिडिङ तथा बिलिङ प्रक्रियामा सहयोग गर्ने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779822128475" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/6.jpg" alt="सदस्य"></div>
+            </div>
+            <!-- सल्लाहकार समिति (branding) -->
+            <div class="jj-portfolio-box mix branding fly-in" data-delay="700">
+              <div class="jj-portfolio-content">
+                <h3>संयोजक</h3>
+                <p>श्री डम्मर बहादुर रावल</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८०१७१८४२२</p>
+                <a href="#" class="jj-readMore" data-info-id="info23">Explore More</a>
+              <div id="info23" class="jj-hidden-info">
+                 <h4>सदस्य, सल्लाहकार समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> संस्थालाई आवश्यक परेको बेला नीतिगत तथा कानुनी सल्लाह प्रदान गर्ने, संस्थाका दीर्घकालीन योजना तथा रणनीति निर्माणमा मार्गदर्शन गर्ने, संस्थाले सञ्चालन गर्ने ठूला परियोजनाहरूको सम्भाव्यता अध्ययनमा सहयोग गर्ने, र संस्थाको छवि निर्माण तथा सुदृढीकरणमा योगदान पुर्याउने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="https://wa.me/9779801718422" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/13.jpg" alt="संयोजक"></div>
+            </div>
+            <div class="jj-portfolio-box mix branding fly-in" data-delay="800">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री रुद्र चौधरी</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८xxxxxxxx</p>
+                <a href="#" class="jj-readMore" data-info-id="info20">Explore More</a>
+              <div id="info20" class="jj-hidden-info">
+                 <h4>सदस्य, सल्लाहकार समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> संस्थालाई आवश्यक परेको बेला नीतिगत तथा कानुनी सल्लाह प्रदान गर्ने, संस्थाका दीर्घकालीन योजना तथा रणनीति निर्माणमा मार्गदर्शन गर्ने, संस्थाले सञ्चालन गर्ने ठूला परियोजनाहरूको सम्भाव्यता अध्ययनमा सहयोग गर्ने, र संस्थाको छवि निर्माण तथा सुदृढीकरणमा योगदान पुर्याउने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/14.jpg" alt="सदस्य"></div>
+            </div>
+            <div class="jj-portfolio-box mix branding fly-in" data-delay="900">
+              <div class="jj-portfolio-content">
+                <h3>सदस्य</h3>
+                <p>श्री राम प्रसाद न्यौपाने</p>
+                <p><i class='bx bx-phone-call'></i>&nbsp; ९८xxxxxxxx</p>
+                <a href="#" class="jj-readMore" data-info-id="info21">Explore More</a>
+              <div id="info21" class="jj-hidden-info">
+                 <h4>सदस्य, सल्लाहकार समिति</h4>
+                 <p><strong>कार्य विवरण:</strong> संस्थालाई आवश्यक परेको बेला नीतिगत तथा कानुनी सल्लाह प्रदान गर्ने, संस्थाका दीर्घकालीन योजना तथा रणनीति निर्माणमा मार्गदर्शन गर्ने, संस्थाले सञ्चालन गर्ने ठूला परियोजनाहरूको सम्भाव्यता अध्ययनमा सहयोग गर्ने, र संस्थाको छवि निर्माण तथा सुदृढीकरणमा योगदान पुर्याउने।</p>
+                 <div class="jj-social-links" style="margin-top: 10px; display: flex; gap: 15px;">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook-circle' style="font-size: 24px; color: #3b5998;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' style="font-size: 24px; color: #E1306C;"></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-whatsapp' style="font-size: 24px; color: #25D366;"></i></a>
+                 </div>
+              </div>
+              </div>
+              <div class="jj-portfolio-img"><img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/portfolio/15.jpg" alt="सदस्य"></div>
+            </div>
+          </div>
+        </section>
+        <!-- CONTACT -->
+        <section class="down-box" id="contact">
+          <div class="jj-contactSkills">
+            <div class="jj-contact-info fly-in"><div class="main-text"><h2 class="heading">Contact Us</h2></div>
+              <form id="contactForm">
+                <div class="jj-input-box"><input type="text" id="firstName" placeholder="First Name" required><span class="jj-error-message" id="firstNameError">First name required</span></div>
+                <div class="jj-input-box"><input type="text" id="lastName" placeholder="Last Name" required><span class="jj-error-message" id="lastNameError">Last name required</span></div>
+                <div class="jj-input-box"><input type="email" id="email" placeholder="Email" required><span class="jj-error-message" id="emailError">Valid email required</span></div>
+                <div class="jj-input-box"><input type="text" id="subject" placeholder="Subject" required><span class="jj-error-message" id="subjectError">Subject required</span></div>
+                <div class="jj-input-box"><textarea id="message" placeholder="Your message..." required></textarea><span class="jj-error-message" id="messageError">Message required</span></div>
+                <div class="formsummitbtn">
+                  <div class="formBtn jj-feedback-btn-whatsapp"><button type="button" id="sendWhatsApp" class="jj-btn"><span>Send</span> <i class='bx bxl-whatsapp'></i></button></div>
+                  <div class="formBtn jj-feedback-btn-email"><button type="button" id="sendEmail" class="jj-btn"><span>Send</span> <i class='bx bxl-gmail'></i></button></div>
+                </div>
+              </form>
+            </div>
+            <div class="jj-skills fly-in"><div class="skillBox"><div class="main-text"><h2 class="heading">Our Skills</h2><span>Let Us Help You</span></div></div></div>
+          </div>
+        </section>
+        <div class="jj-footer"><p>Copyright © 2025 by Jeevan Jyoti Gramin Bidhyut Sahakari Sastha Ltd. | All Rights Reserved.</p></div>
+        <div class="jj-progress" id="progress"><span class="jj-progress-value" id="progress-value"><i class='bx bxs-chevrons-up'></i></span></div>        
+        <script>
+          
+          (function() {            
+            function normalizeNepaliText(text) {
+                if (typeof text !== 'string') return text;    
+                const temp = document.createElement('textarea');
+                temp.innerHTML = text;
+                return temp.value;
+            }
         
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form values
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            // Validate form
-            let isValid = true;
-            
-            // Reset error states
-            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('input-error'));
-            
-            // Validate each field
-            if (!firstName) {
-                document.getElementById('firstNameError').style.display = 'block';
-                document.getElementById('firstName').classList.add('input-error');
-                isValid = false;
+            // Override clipboard writeText
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                const originalWriteText = navigator.clipboard.writeText;
+                navigator.clipboard.writeText = function(text) {
+                    return originalWriteText.call(this, normalizeNepaliText(text));
+                };
             }
-            
-            if (!lastName) {
-                document.getElementById('lastNameError').style.display = 'block';
-                document.getElementById('lastName').classList.add('input-error');
-                isValid = false;
-            }
-            
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById('emailError').style.display = 'block';
-                document.getElementById('email').classList.add('input-error');
-                isValid = false;
-            }
-            
-            if (!subject) {
-                document.getElementById('subjectError').style.display = 'block';
-                document.getElementById('subject').classList.add('input-error');
-                isValid = false;
-            }
-            
-            if (!message) {
-                document.getElementById('messageError').style.display = 'block';
-                document.getElementById('message').classList.add('input-error');
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Form Incomplete',
-                    text: 'Please fill all required fields correctly',
-                    confirmButtonColor: '#e6006d'
-                });
-                return;
-            }
-            
-            // Prepare the message content
-            const fullMessage = `Sugguestions of:\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
-            
-            // Encode the message for WhatsApp
-            const encodedMessage = encodeURIComponent(fullMessage);
-            
-            // Create WhatsApp URL
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            
-            // Create mailto URL
-            const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullMessage)}`;
-            
-            // Open WhatsApp in a new tab
-            window.open(whatsappUrl, '_blank');
-            
-            // Open email client
-            window.location.href = mailtoUrl;
-            
-            // Show success message
-            Swal.fire({
-                icon: 'success',
-                html: `Sucessfully sent!!!`,
-                confirmButtonColor: '#e6006d'
-            });
-            
-            // Reset the form
-            contactForm.reset();
-        });
-         // JavaScript remains the same as in the previous version
-        let menuIcon = document.querySelector(".menu-icon");
-        let navlist = document.querySelector(".navlist");
-        menuIcon.addEventListener("click", () => {
-            menuIcon.classList.toggle("active");
-            navlist.classList.toggle("active");
-            document.body.classList.toggle("open");
-        });
-        navlist.addEventListener("click", () => {
-            navlist.classList.remove("active");
-            menuIcon.classList.remove("active");
-            document.body.classList.remove("open");
-        });
-
-        let text = document.querySelector(".text p");
-        text.innerHTML = text.innerHTML.split("").map((char, i) =>
-            `<b style="transform:rotate(${i * 6.3}deg)">${char}</b>`
-        ).join("");
-
-        const buttons = document.querySelectorAll('.about-btn button');
-        const contents = document.querySelectorAll('.content');
-        buttons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                contents.forEach(content => content.style.display = 'none');
-                contents[index].style.display = 'block';
-                buttons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-            });
-        });
-
-        var mixer = mixitup('.portfolio-gallery', {
-            selectors: { target: '.portfolio-box' },
-            animation: { duration: 500 }
-        });
-
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: { el: ".swiper-pagination", clickable: true },
-            autoplay: { delay: 3000, disableOnInteraction: false },
-            breakpoints: {
-                576: { slidesPerView: 2, spaceBetween: 10 },
-                1200: { slidesPerView: 3, spaceBetween: 20 }
-            }
-        });
-
-        const first_skill = document.querySelector(".skill:first-child");
-        const sk_counters = document.querySelectorAll(".counter span");
-        const progress_bars = document.querySelectorAll(".skills svg circle");
-        let skillsPlayed = false;
-
-        window.addEventListener("scroll", () => {
-            if (!skillsPlayed) skillsCounter();
-        });
-
-        function hasReached(el) {
-            let topPosition = el.getBoundingClientRect().top;
-            return window.innerHeight >= topPosition + el.offsetHeight;
-        }
-
-        function updateCount(num, maxNum) {
-            let currentNum = +num.innerText;
-            if (currentNum < maxNum) {
-                num.innerText = currentNum + 1;
-                setTimeout(() => updateCount(num, maxNum), 12);
-            }
-        }
-
-        function skillsCounter() {
-            if (!hasReached(first_skill)) return;
-            skillsPlayed = true;
-            sk_counters.forEach((counter, i) => {
-                let target = +counter.dataset.target;
-                let strokeValue = 465 - 465 * (target / 100);
-                progress_bars[i].style.setProperty("--target", strokeValue);
-                setTimeout(() => updateCount(counter, target), 400);
-            });
-            progress_bars.forEach(p => p.style.animation = "progress 2s ease-in-out forwards");
-        }
-
-        let calcScrollValue = () => {
-            let scrollProgress = document.getElementById("progress");
-            let pos = document.documentElement.scrollTop;
-            let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrollValue = Math.round((pos * 100) / calcHeight);
-            if (pos > 100) {
-                scrollProgress.style.display = "grid";
-            } else {
-                scrollProgress.style.display = "none";
-            }
-            scrollProgress.addEventListener("click", () => {
-                document.documentElement.scrollTop = 0;
-            });
-            scrollProgress.style.background = `conic-gradient(#fff ${scrollValue}%, #e6006d ${scrollValue}%)`;
-        };
-
-        window.onscroll = calcScrollValue;
-        window.onload = calcScrollValue;
-
-        let menuLi = document.querySelectorAll("header ul li a");
-        let section = document.querySelectorAll('section');
-
-        function activeMenu() {
-            let len = section.length;
-            while (--len && window.scrollY + 97 < section[len].offsetTop) {}
-            menuLi.forEach(sec => sec.classList.remove("active"));
-            menuLi[len].classList.add("active");
-        }
-
-        activeMenu();
-        window.addEventListener("scroll", activeMenu);
-
-        ScrollReveal({ distance: "90px", duration: 2000, delay: 200 });
-        ScrollReveal().reveal('.hero-info, .main-text, .proposal, .heading', { origin: "top" });
-        ScrollReveal().reveal('.about-img, .fillter-buttons, .contact-info', { origin: "left" });
-        ScrollReveal().reveal('.about-content, .skills', { origin: "right" });
-        ScrollReveal().reveal('.allServices, .portfolio-gallery, .blog-box, footer, .img-hero', { origin: "bottom" });
-
-        // Modified Explore More functionality
-        const readMoreLinks = document.querySelectorAll('.readMore');
         
-        readMoreLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const infoId = link.getAttribute('data-info-id');
-                const infoDiv = document.getElementById(infoId);
-                
-                // Close all other open info divs first
-                document.querySelectorAll('.hidden-info').forEach(div => {
-                    if (div !== infoDiv) {
-                        div.classList.remove('active');
-                        setTimeout(() => div.style.display = 'none', 300);
-                    }
-                });
-                
-                // Toggle the clicked info div
-                if (infoDiv.classList.contains('active')) {
-                    infoDiv.classList.remove('active');
-                    setTimeout(() => infoDiv.style.display = 'none', 300);
-                } else {
-                    infoDiv.style.display = 'block';
-                    setTimeout(() => infoDiv.classList.add('active'), 10);
+            // Override document.execCommand('copy')
+            document.addEventListener('copy', function(e) {
+                const selection = window.getSelection();
+                if (selection && selection.toString()) {
+                    e.clipboardData.setData('text/plain', normalizeNepaliText(selection.toString()));
+                    e.preventDefault();
                 }
             });
-        });
-
-        // Close when clicking anywhere else on the document
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.readMore') && !e.target.closest('.hidden-info')) {
-                document.querySelectorAll('.hidden-info').forEach(div => {
-                    div.classList.remove('active');
-                    setTimeout(() => div.style.display = 'none', 300);
+        
+            // Fix for WhatsApp sharing
+            const originalOpen = window.open;
+            window.open = function(url, name, features) {
+                if (url && url.includes('wa.me') && url.includes('text=')) {
+                    const parts = url.split('text=');
+                    if (parts.length > 1) {
+                        const decodedText = decodeURIComponent(parts[1]);
+                        const normalizedText = normalizeNepaliText(decodedText);
+                        parts[1] = encodeURIComponent(normalizedText);
+                        url = parts.join('text=');
+                    }
+                }
+                return originalOpen.call(this, url, name, features);
+            };
+        
+            // Fix for mailto links
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('a[href^="mailto:"]')) {
+                    const link = e.target.closest('a[href^="mailto:"]');
+                    const href = link.getAttribute('href');
+                    if (href.includes('body=')) {
+                        const parts = href.split('body=');
+                        if (parts.length > 1) {
+                            const decodedBody = decodeURIComponent(parts[1]);
+                            const normalizedBody = normalizeNepaliText(decodedBody);
+                            parts[1] = encodeURIComponent(normalizedBody);
+                            link.setAttribute('href', parts.join('body='));
+                        }
+                    }
+                }
+            });
+        
+            // Fix for all data-content attributes
+            function fixDataAttributes() {
+                document.querySelectorAll('[data-content]').forEach(el => {
+                    if (el.dataset.content) {
+                        el.dataset.content = normalizeNepaliText(el.dataset.content);
+                    }
                 });
             }
-        });
-
-function showFormPopup() {
-    Swal.fire({
-        position: 'top',
-        showCloseButton: true,
-        allowOutsiteClick:false,
-       html:`
-            <div class="iframe-container">
-                 <iframe src="https://script.google.com/macros/s/AKfycbwm1rItppcP9Ef0lk7PDBSenzRkt3hOQzHXOxupdsQuuZl1_yrACfpO5f5H4htwHtcR4A/exec" frameborder="0" allowfullscreen 
-            </div> `,
-        showConfirmButton: false,
-        background: 'transparent',
-        width: '100%',
-       padding: 0,
-    });
-}
-</script>
-</body>
+        
+            // Run on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', fixDataAttributes);
+            } else {
+                fixDataAttributes();
+            }
+        })();
+        
+          
+          (function() {
+            // menu toggle
+            const menuIcon = document.querySelector(".jj-menu-icon");
+            const navlist = document.querySelector(".jj-nav");
+            const overlay = document.querySelector(".jj-overlay");
+            const body = document.body;
+            function closeMenu() { navlist.classList.remove("active"); menuIcon.classList.remove("active"); body.classList.remove("jj-open"); }
+            if(menuIcon) menuIcon.addEventListener("click", (e) => { e.stopPropagation(); navlist.classList.toggle("active"); menuIcon.classList.toggle("active"); body.classList.toggle("jj-open"); });
+            if(overlay) overlay.addEventListener("click", closeMenu);
+            if(navlist) navlist.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+            
+            // rotating text setup
+            function setupRotatingText() {
+              document.querySelectorAll(".img-hero .rotate-text .text p").forEach(p => {
+                if (!p.querySelector("b")) {
+                  let text = p.innerText;
+                  let html = "";
+                  for (let i = 0; i < text.length; i++) {
+                    let char = text[i] === " " ? "\u00A0" : text[i];
+                    html += `<b style="transform:rotate(${i * (360 / text.length)}deg)">${char}</b>`;
+                  }
+                  p.innerHTML = html;
+                }
+              });
+            }
+            setupRotatingText();
+           
+            function setOrigin() {
+              const allB = document.querySelectorAll('.img-hero .rotate-text .text b');
+              const textDiv = document.querySelector('.img-hero .rotate-text .text');
+              if (!allB.length || !textDiv) return;
+              const radius = textDiv.offsetHeight / 2;
+              const originY = radius > 20 ? radius : 200;
+              allB.forEach(b => b.style.transformOrigin = `0 ${originY}px`);
+            }
+            window.addEventListener('load', () => setTimeout(setOrigin, 30));
+            window.addEventListener('resize', () => { clearTimeout(window.originTimer); window.originTimer = setTimeout(setOrigin, 60); });
+            
+            // about buttons
+            const aboutBtns = document.querySelectorAll('.jj-about-btn button');
+            const contents = document.querySelectorAll('.jj-content');
+            if (aboutBtns.length && contents.length) {
+              aboutBtns.forEach((btn, idx) => {
+                btn.addEventListener('click', function(){
+                  contents.forEach(c=>c.style.display='none');
+                  contents[idx].style.display='block';
+                  aboutBtns.forEach(b=>b.classList.remove('active'));
+                  btn.classList.add('active');
+                });
+              });
+            }
+            
+            // MIXITUP FILTER
+            let mixer = null;
+            if (document.getElementById('portfolio-gallery')) {
+              mixer = mixitup('#portfolio-gallery', {
+                selectors: { target: '.jj-portfolio-box' },
+                animation: { duration: 400 },
+                load: { filter: 'all' }
+              });
+            }
+            
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+              btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active-filter'));
+                this.classList.add('active-filter');
+              });
+            });
+            
+            // Contact form functionality - FIXED VERSION
+            const sendWhatsApp = document.getElementById('sendWhatsApp');
+            const sendEmail = document.getElementById('sendEmail');
+            
+            // Validation function - returns validation result and message
+            function validateForm() {
+              let isValid = true;
+              
+              // Reset error messages
+              document.querySelectorAll('.jj-error-message').forEach(el => el.style.display = 'none');
+              document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('jj-input-error'));
+              
+              // Get form values
+              const firstName = document.getElementById('firstName')?.value.trim() || '';
+              const lastName = document.getElementById('lastName')?.value.trim() || '';
+              const email = document.getElementById('email')?.value.trim() || '';
+              const subject = document.getElementById('subject')?.value.trim() || '';
+              const message = document.getElementById('message')?.value.trim() || '';
+              
+              // Validate fields
+              if (!firstName) {
+                document.getElementById('firstNameError').style.display = 'block';
+                document.getElementById('firstName').classList.add('jj-input-error');
+                isValid = false;
+              }
+              
+              if (!lastName) {
+                document.getElementById('lastNameError').style.display = 'block';
+                document.getElementById('lastName').classList.add('jj-input-error');
+                isValid = false;
+              }
+              
+              if (!email) {
+                document.getElementById('emailError').style.display = 'block';
+                document.getElementById('email').classList.add('jj-input-error');
+                isValid = false;
+              } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                document.getElementById('email').classList.add('jj-input-error');
+                isValid = false;
+              }
+              
+              if (!subject) {
+                document.getElementById('subjectError').style.display = 'block';
+                document.getElementById('subject').classList.add('jj-input-error');
+                isValid = false;
+              }
+              
+              if (!message) {
+                document.getElementById('messageError').style.display = 'block';
+                document.getElementById('message').classList.add('jj-input-error');
+                isValid = false;
+              }
+              
+              return {
+                isValid: isValid,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                subject: subject,
+                message: message
+              };
+            }
+            
+            // Clear form fields
+            function clearFormFields() {
+              document.getElementById('firstName').value = '';
+              document.getElementById('lastName').value = '';
+              document.getElementById('email').value = '';
+              document.getElementById('subject').value = '';
+              document.getElementById('message').value = '';
+            }
+            
+            // WhatsApp functionality
+            if (sendWhatsApp) {
+              sendWhatsApp.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const validation = validateForm();
+                
+                if (!validation.isValid) {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill required fields correctly.',
+                    confirmButtonColor: '#e6006d'
+                  });
+                  return;
+                }
+                
+                const fullMessage = `*गुनासो तथा प्रतिक्रिया to Jeevan Jyoti*\n\n*Name:* ${validation.firstName} ${validation.lastName}\n*Email:* ${validation.email}\n*Subject:* ${validation.subject}\n*Message:* ${validation.message}`;
+                
+                // WhatsApp number - use the correct one
+                window.open(`https://wa.me/9823397879?text=${encodeURIComponent(fullMessage)}`, '_blank');
+                
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Message Sent!',
+                  text: 'Your message has been opened in WhatsApp.',
+                  confirmButtonColor: '#e6006d'
+                });
+                
+                clearFormFields();
+              });
+            }
+            
+            // Email functionality
+            if (sendEmail) {
+              sendEmail.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const validation = validateForm();
+                
+                if (!validation.isValid) {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill all required fields correctly.',
+                    confirmButtonColor: '#e6006d'
+                  });
+                  return;
+                }
+                
+                const fullMessage = `\u0917\u0941\u0928\u093e\u0938\u094b \u0924\u0925\u093e \u092a\u094d\u0930\u0924\u093f\u0915\u094d\u0930\u093f\u092f\u093e to Jeevan Jyoti\n\nName: ${validation.firstName} ${validation.lastName}\nEmail: ${validation.email}\nSubject: ${validation.subject}\nMessage: ${validation.message}`;
+                
+                window.location.href =`mailto:jeevanjyotigraminbidhdhut2065@gmail.com?subject=${encodeURIComponent(validation.subject)}&body=${encodeURIComponent(fullMessage)}`;        
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Email Ready!',
+                  text: 'Your email client has been opened.',
+                  confirmButtonColor: '#e6006d'
+                });
+                
+                clearFormFields();
+              });
+            }
+            
+            // read more
+            document.querySelectorAll('.jj-readMore').forEach(link => {
+              link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = link.getAttribute('data-info-id');
+                const info = document.getElementById(id);
+                if(info) {
+                  document.querySelectorAll('.jj-hidden-info').forEach(h => {
+                    if(h !== info) h.classList.remove('active');
+                  });
+                  info.classList.toggle('active');
+                }
+              });
+            });
+            
+            document.addEventListener('click', (e) => {
+              if(!e.target.closest('.jj-readMore') && !e.target.closest('.jj-hidden-info')) {
+                document.querySelectorAll('.jj-hidden-info').forEach(h => h.classList.remove('active'));
+              }
+            });
+            
+            // progress
+            const progress = document.getElementById('progress');
+            window.addEventListener('scroll', () => {
+              let pos = document.documentElement.scrollTop;
+              let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+              let scrollValue = Math.round((pos * 100) / calcHeight);
+              if (pos > 200) progress.style.display = 'grid'; else progress.style.display = 'none';
+              progress.style.background = `conic-gradient(#fff ${scrollValue}%, #e6006d ${scrollValue}%)`;
+            });
+            
+            if(progress) {
+              progress.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+            
+            // active nav
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.jj-nav li a');
+            window.addEventListener('scroll', () => {
+              let current = '';
+              sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if(pageYOffset >= sectionTop) current = section.getAttribute('id');
+              });
+              navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href').includes(current)) link.classList.add('active');
+              });
+            });
+            const flyElements = document.querySelectorAll('.fly-in');
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  setTimeout(() => {
+                    entry.target.classList.add('active');
+                  }, entry.target.dataset.delay || 0);
+                }
+              });
+            }, { threshold: 0.1 });
+            
+            flyElements.forEach(el => observer.observe(el));
+          })();
+          
+          // bill popup fullscreen
+          function showFormPopup() {
+            Swal.fire({
+              position: 'top',
+              showCloseButton: true,
+              allowOutsideClick: false,
+              html: `<div class="iframe-container"><iframe src="https://script.google.com/macros/s/AKfycbwm1rItppcP9Ef0lk7PDBSenzRkt3hOQzHXOxupdsQuuZl1_yrACfpO5f5H4htwHtcR4A/exec" frameborder="0"></iframe></div>`,
+              showConfirmButton: false,
+              background: 'transparent',
+              width: '100%',
+              padding: 0,
+              customClass: { popup: 'fullscreen-popup' }
+            });
+          }
+        </script>
+        
+        <style> 
+          .header-decoration {
+                    text-align: center;
+                    margin-bottom: 30px;
+                }
+                .header-decoration h1 {
+                    font-size: 2.6rem;
+                    color: #1b4d1b;
+                    letter-spacing: 1px;
+                    font-weight: 700;
+                    line-height: 1.3;
+                    text-shadow: 2px 2px 0 #dcf5b2;
+                    border-bottom: 3px solid #7cb045;
+                    display: inline-block;
+                    padding-bottom: 15px;
+                    margin-bottom: 10px;
+                }
+                .sanstha-tag {
+                    background: #2e6b2e;
+                    color: #f9ffe2;
+                    display: inline-block;
+                    padding: 6px 25px;
+                    border-radius: 60px;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    margin-top: 5px;
+                    box-shadow: 0 4px 10px #b1d18b;
+                }
+                .intro-verse {
+                    background: #e3f5d3;
+                    padding: 20px 30px;
+                    border-radius: 60px 60px 30px 30px;
+                    margin: 30px 0 40px 0;
+                    font-size: 1.2rem;
+                    border-left: 10px solid #3b8f3b;
+                    font-style: italic;
+                    box-shadow: inset 0 -2px 10px #c0ddb0;
+                }
+                .grid-para {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 32px;
+                }
+                .paragraph-card {
+                    background: #fefffa;
+                    padding: 28px 32px;
+                    border-radius: 48px 20px 48px 20px;
+                    box-shadow: 0 8px 0 #6c9c6c, 0 12px 25px -8px #3d5e3d;
+                    border: 1px solid #b6d7a8;
+                    transition: all 0.2s ease;
+                }
+                .paragraph-card:hover {
+                    box-shadow: 0 6px 0 #4f7a4f, 0 18px 30px -8px #2b462b;
+                    transform: translateY(-3px);
+                }
+                .paragraph-card h2 {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    font-size: 1.9rem;
+                    color: #1d4d1d;
+                    border-left: 15px solid #f5b342;
+                    padding-left: 18px;
+                    margin-bottom: 20px;
+                    font-weight: 650;
+                }
+                .paragraph-card h2 span {
+                    background: #f5b342;
+                    color: #1e3a1e;
+                    font-size: 1.2rem;
+                    border-radius: 50px;
+                    width: 40px;
+                    height: 40px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                }
+                .paragraph-card p {
+                    font-size: 1.2rem;
+                    margin-bottom: 15px;
+                    text-align: justify;
+                }
+                .bullet-vikas {
+                    margin: 15px 0 5px 20px;
+                    list-style-type: '💡 ';
+                    font-size: 1.15rem;
+                    line-height: 1.9;
+                }
+                .bullet-vikas li {
+                    padding-left: 12px;
+                    margin-bottom: 6px;
+                }
+                .bullet-vikas li strong {
+                    color: #267326;
+                }
+                .sewa-khetra {
+                    background: #266b2b;
+                    color: #fefed5;
+                    padding: 25px 30px;
+                    border-radius: 40px 10px 40px 10px;
+                    margin-top: 25px;
+                    box-shadow: 0 6px 0 #124012;
+                }
+                .sewa-khetra h3 {
+                    font-size: 1.8rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: #ffecaa;
+                    border-bottom: 2px solid #ffdb7c;
+                    padding-bottom: 10px;
+                    margin-bottom: 20px;
+                }
+                .location-grid {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px 35px;
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    background: hsla(0, 100%, 50%, 0.1);
+                    padding: 20px 25px;
+                    border-radius: 35px;
+                    color: #f9ffd6;
+                    justify-content: center;
+                }
+                .location-grid div {
+                    background: hsla(0, 100%, 50%, 0.1);
+                    padding: 8px 28px;
+                    border-radius: 40px;
+                    box-shadow: inset -2px -2px 0 #174217;
+                    border: 1px solid #a9dc8c;
+                }
+                .badge-vistara {
+                    display: inline-block;
+                    background: #d9e6c1;
+                    border-radius: 40px;
+                    padding: 5px 25px;
+                    font-weight: bold;
+                }
+                .vakra-rekha {
+                    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20" width="100"><path d="M0,10 Q30,0 50,10 T100,10" stroke="%2377aa55" fill="none" stroke-width="2"/></svg>') repeat-x bottom;
+                    height: 30px;
+                    opacity: 0.5;
+                }
+           @media (max-width: 600px) {
+                    .header-decoration h1 { font-size: 1.9rem; }
+                }
+          /* Additional styles for contact buttons */
+          .jj-feedback-btn-whatsapp button,
+          .jj-feedback-btn-email button {
+            width: 120px;
+            justify-content: center;
+          }
+          
+          .jj-feedback-btn-whatsapp button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+          }
+          
+          .jj-feedback-btn-whatsapp button:hover {
+            background-color: #128C7E;
+          }
+          
+          .jj-feedback-btn-email button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+          }
+          
+          .jj-feedback-btn-email button:hover {
+            background-color: #c1121f;
+          }
+          
+          .formsummitbtn {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin-top: 20px;
+          }
+          
+          .formBtn {
+            border: none;
+          }
+        </style>
+    </body>
 </html>
-
-
-
-
-
-
-
