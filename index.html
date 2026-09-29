@@ -4,29 +4,43 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Jeevan | Jyoti</title>
+        <!-- SweetAlert2 (popup) -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Boxicons (icons) -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Mixitup (filter) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+        <!-- ScrollReveal (fly-in) -->
         <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!-- ✅ SINGLE font load: Devanagari + Poppins together -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <style>
+          /* ✅ No @import needed — fonts are loaded via <link> above */
+
           * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             list-style: none;
             scroll-behavior: smooth;
+            /* ✅ Devanagari-capable fonts FIRST so ०-९ always find a glyph */
             font-family: 'Noto Sans Devanagari', 'Mukta', 'Poppins', system-ui, 'Segoe UI', 'Mangal', sans-serif;
             font-feature-settings: normal;
             font-variant-numeric: normal;
+          }
+          /* ✅ Explicit override on every element that may render Devanagari */
           body, h1, h2, h3, h4, h5, h6, p, span, a, li, div, button, input, textarea, .heading, .main-text, .service-title, .service-description, .service-category, .service-price, .sanstha-tag, .intro-verse, .paragraph-card, .sewa-khetra, .location-grid, .bullet-vikas, .jj-nav a, .jj-btn, .service-link, .jj-readMore, .jj-portfolio-content {
             font-family: 'Noto Sans Devanagari', 'Mukta', 'Poppins', system-ui, 'Segoe UI', 'Mangal', sans-serif;
           }
+          /* For purely Latin UI text, Poppins is fine */
           .jj-logo, .jj-gradient-span, .heading:lang(en), [lang="en"] {
             font-family: 'Poppins', 'Noto Sans Devanagari', 'Mukta', sans-serif;
           }
+
           :root {
             --primary: #e6006d;
             --secondary: #630db2;
@@ -55,6 +69,7 @@
           .main-text span { color: var(--font-color); display: block; margin-bottom: 1.5rem; }
           a { text-decoration: none; color: #000; }
           a:hover{ transform: scale(1.05);}
+          /* ---------- HEADER ---------- */
           .jj-header {
             padding: 12px 5%;
             width: 100%;
@@ -166,6 +181,7 @@
           }
           body.jj-open .jj-overlay { opacity:1; pointer-events:auto; }
           section { padding: 60px 5%; width: 100%; overflow-x: hidden; }
+          /* ---------- HOME ---------- */
           .jj-home {
             min-height: 100vh;
             display: grid;
@@ -300,6 +316,7 @@
             width: 220px;
             height: 45px;
           }
+
           .jj-social-media a {
             width: 42px; height: 42px; font-size: 1.5rem;
             background: var(--gradient-color-bg); color:white;
@@ -314,6 +331,7 @@
             display: flex; align-items: center; justify-content: center;
             animation: animate 1s linear infinite;
           }
+          /* ---------- ABOUT ---------- */
           .jj-about {
             display:flex; align-items:center; gap:3rem; flex-wrap:wrap; width:100%;
             overflow: visible;
@@ -334,6 +352,8 @@
           .jj-content-btn .jj-content { margin-top:1rem; display:none; }
           .jj-content-btn .jj-content:first-child { display:block; }
           .jj-content .text-box p { text-align:center; }
+
+
           .services-container {
             max-width: 100%;
             margin: 0 auto;
@@ -558,6 +578,7 @@
           }
           .jj-portfolio-img img:hover { transform: scale(1.15); }
           .jj-portfolio-gallery.res { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,330px)); justify-content: center; }
+          /* contact */
           .jj-contactSkills {display:flex; gap:2rem; flex-wrap:wrap; width:100%;}
           .jj-contact-info, .jj-skills {flex:1; min-width:280px; padding:2rem; border-radius:5px; background: var(--gradient-white-bg2); box-shadow:rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; transition: var(--transition-smooth);}
           .jj-contact-info:hover, .jj-skills:hover { box-shadow: var(--hover-box-shadow); }
@@ -572,26 +593,33 @@
           .jj-footer { text-align:center; padding:2rem 5%; border-top:1px solid #d4d4d4; background:var(--gradient-white-bg); width:100%; }
           .formBtn { border:none; }
           .formsummitbtn {display:flex; justify-content: space-around; gap: 10px; margin-top: 20px;}
+
           .jj.feedback-btn.whatsapp {
               background-color: #25D366;
               color: white;
           }
+
           .jj.feedback-btn.whatsapp:hover {
               background-color: #128C7E;
               transform: translateY(-3px);
           }
+
           .jj.feedback-btn.email {
               background-color: var(--primary);
               color: white;
           }
+
           .jj.feedback-btn.email:hover {
               background-color: #c1121f;
               transform: translateY(-3px);
           }
+
+          /* Fix for form buttons */
           #sendWhatsApp, #sendEmail {
             width: 120px;
             justify-content: center;
           }
+
           .jj-progress {
             position:fixed; bottom:30px; right:20px; width:50px; height:50px;
             background:conic-gradient(#fff 0%, #e6006d 0%); border-radius:50%;
@@ -603,6 +631,7 @@
             transition: var(--transition-smooth);
           }
           .jj-progress-value:hover { transform: scale(1.1); }
+          /* fullscreen bill popup */
           .fullscreen-popup {
             width: 100vw !important;
             height: 100vh !important;
@@ -611,6 +640,7 @@
             left: 0 !important;
             position: fixed !important;
           }
+
           .fullscreen-popup .swal2-close {
             font-size: 4rem !important;   /* Increase size */
             color: #1d3b1d;
@@ -632,6 +662,7 @@
             height: 100%;
             border: none;
           }
+          /* Fly-in animation classes */
           .fly-in {
             opacity: 0;
             transform: translateY(30px);
@@ -641,6 +672,8 @@
             opacity: 1;
             transform: translateY(0);
           }
+
+          /* responsive */
           @media (max-width: 991px) {
             .jj-home { grid-template-columns:1fr; text-align:center; gap:1rem; }
             .jj-hero-info { order:2; }
@@ -700,6 +733,7 @@
             <div class="jj-menu-icon"><div class="jj-bar"></div></div>
           </div>
         </div>
+        <!-- HOME -->
         <section class="jj-home" id="home">
             <div>
                  <div class="header-decoration">
