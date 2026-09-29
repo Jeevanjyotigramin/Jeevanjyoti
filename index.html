@@ -12,18 +12,35 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
         <!-- ScrollReveal (fly-in) -->
         <script src="https://unpkg.com/scrollreveal"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+
+        <!-- ✅ SINGLE font load: Devanagari + Poppins together -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+          /* ✅ No @import needed — fonts are loaded via <link> above */
+
           * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             list-style: none;
             scroll-behavior: smooth;
-            font-family: 'Poppins', system-ui, 'Segoe UI','Mukta', 'Hind', 'Noto Sans Devanagari', 'Mangal', sans-serif; 
+            /* ✅ Devanagari-capable fonts FIRST so ०-९ always find a glyph */
+            font-family: 'Noto Sans Devanagari', 'Mukta', 'Poppins', system-ui, 'Segoe UI', 'Mangal', sans-serif;
             font-feature-settings: normal;
+            font-variant-numeric: normal;
           }
+          /* ✅ Explicit override on every element that may render Devanagari */
+          body, h1, h2, h3, h4, h5, h6, p, span, a, li, div, button, input, textarea, .heading, .main-text, .service-title, .service-description, .service-category, .service-price, .sanstha-tag, .intro-verse, .paragraph-card, .sewa-khetra, .location-grid, .bullet-vikas, .jj-nav a, .jj-btn, .service-link, .jj-readMore, .jj-portfolio-content {
+            font-family: 'Noto Sans Devanagari', 'Mukta', 'Poppins', system-ui, 'Segoe UI', 'Mangal', sans-serif;
+          }
+          /* For purely Latin UI text, Poppins is fine */
+          .jj-logo, .jj-gradient-span, .heading:lang(en), [lang="en"] {
+            font-family: 'Poppins', 'Noto Sans Devanagari', 'Mukta', sans-serif;
+          }
+
           :root {
             --primary: #e6006d;
             --secondary: #630db2;
@@ -119,7 +136,7 @@
             padding: 8px 16px;
             font-weight: 500;
             transition: var(--transition-smooth);
-            background: hsla(0, 100%, 50%, 0.1);           
+            background: hsla(0, 100%, 50%, 0.1);
             border-radius: 60px;
             color: #1d3b1d;
             box-shadow: 1.5px 1.5px 3px #0e0e0e, -1.5px -1.5px 3px rgb(95 94 94 / 25%), inset 0px 0px 0px #0e0e0e, inset 0px -0px 0px #5f5e5e;
@@ -128,10 +145,10 @@
             align-items: center;
             gap: 5px;
           }
-          .jj-btn:hover { 
+          .jj-btn:hover {
             background: var(--gradient-color-bg);
             box-shadow: var(--hover-box-shadow); transform: var(--scale-lift); }
-          
+
           .jj-menu-icon {
             display: none;
             width: 30px; height: 30px;
@@ -299,13 +316,13 @@
             width: 220px;
             height: 45px;
           }
-          
+
           .jj-social-media a {
             width: 42px; height: 42px; font-size: 1.5rem;
             background: var(--gradient-color-bg); color:white;
             display: inline-flex; justify-content: center; align-items: center;
             transition: var(--transition-smooth); border-radius: 50%; z-index: 1;
-          } 
+          }
           .jj-social-media a:hover { transform: var(--scale-lift); box-shadow: var(--hover-box-shadow); }
           .jj-bg-icon{ position: relative; display: flex; justify-content: center; align-items: center; }
           .jj-bg-icon span {
@@ -335,8 +352,8 @@
           .jj-content-btn .jj-content { margin-top:1rem; display:none; }
           .jj-content-btn .jj-content:first-child { display:block; }
           .jj-content .text-box p { text-align:center; }
-          
-          
+
+
           .services-container {
             max-width: 100%;
             margin: 0 auto;
@@ -412,10 +429,10 @@
           }
           .service-link {
             padding:10px 18px;
-            border:none; border-radius:30px; 
+            border:none; border-radius:30px;
             font-weight:500;
-            background: hsla(0, 100%, 50%, 0.1); 
-            box-shadow: 0 4px 0 #b1741c; 
+            background: hsla(0, 100%, 50%, 0.1);
+            box-shadow: 0 4px 0 #b1741c;
             cursor:pointer;
             transition: var(--transition-smooth);
             text-decoration: none;
@@ -439,7 +456,7 @@
             color: #666;
             margin-bottom: 1rem;
           }
-          
+
           .jj-allServices {
             display: grid;
             grid-template-columns: repeat(3,1fr);
@@ -576,33 +593,33 @@
           .jj-footer { text-align:center; padding:2rem 5%; border-top:1px solid #d4d4d4; background:var(--gradient-white-bg); width:100%; }
           .formBtn { border:none; }
           .formsummitbtn {display:flex; justify-content: space-around; gap: 10px; margin-top: 20px;}
-           
+
           .jj.feedback-btn.whatsapp {
               background-color: #25D366;
               color: white;
           }
-        
+
           .jj.feedback-btn.whatsapp:hover {
               background-color: #128C7E;
               transform: translateY(-3px);
           }
-        
+
           .jj.feedback-btn.email {
               background-color: var(--primary);
               color: white;
           }
-        
+
           .jj.feedback-btn.email:hover {
               background-color: #c1121f;
               transform: translateY(-3px);
           }
-          
+
           /* Fix for form buttons */
           #sendWhatsApp, #sendEmail {
             width: 120px;
             justify-content: center;
           }
-          
+
           .jj-progress {
             position:fixed; bottom:30px; right:20px; width:50px; height:50px;
             background:conic-gradient(#fff 0%, #e6006d 0%); border-radius:50%;
@@ -623,7 +640,7 @@
             left: 0 !important;
             position: fixed !important;
           }
-          
+
           .fullscreen-popup .swal2-close {
             font-size: 4rem !important;   /* Increase size */
             color: #1d3b1d;
@@ -655,7 +672,7 @@
             opacity: 1;
             transform: translateY(0);
           }
-          
+
           /* responsive */
           @media (max-width: 991px) {
             .jj-home { grid-template-columns:1fr; text-align:center; gap:1rem; }
@@ -722,9 +739,10 @@
                  <div class="header-decoration">
                     <h1>⚡ जीवन ज्योती ग्रामीण <br> विद्युत सहकारी संस्था लिमिटेड</h1>
                     <br>
+                    <!-- ✅ Devanagari numerals written as actual Unicode chars -->
                     <div class="sanstha-tag">जानकी गाउँपालिका – २, खैरेनी (कैलाली) <br> स्थापना : २०६३ | </div>
                     <div class="vakra-rekha"></div>
-                    </div>          
+                    </div>
                     <div class="jj-text-animate"><h2>जीबन ज्योति ग्रामीण बिद्युत सहकारी संस्था लिमिटेड</h2></div>
                     <div class="jj-btn-box">
                       <a href="#" onclick="showFormPopup()" class="jj-btn">बिल जाँच गर्नुहोस् <i class='bx bx-right-arrow-alt'></i></a>
@@ -739,7 +757,7 @@
                           <div class="jj-bg-icon"><a href="#"><i class='bx bxl-facebook'></i></a><span></span></div>
                         </div>
                     </div>
-                 </div> 
+                 </div>
              <div>
                 <div class="img-hero fly-in" data-delay="300">
                     <img src="https://raw.githubusercontent.com/Jeevanjyotigramin/Jeevanjyoti/refs/heads/main/img/saddam.png" alt="saddam - Jeevan Jyoti">
@@ -800,13 +818,13 @@
                         <h2><span>१</span> स्थापना काल : २०६३ को दूरदृष्टि</h2>
                         <p>वि.सं. २०६३ मा कैलालीको जानकी गाउँपालिका–२ खैरेनीमा <strong>जीवन ज्योती ग्रामीण विद्युत सहकारी संस्था लिमिटेड</strong> को स्थापना भयो । ग्रामीण विद्युतीकरण र आत्मनिर्भर स्थानीय अर्थतन्त्रको परिकल्पना बोकेर उदाएको यो सहकारी आज ऊर्जा तथा कृषि आपूर्तिको मेरुदण्ड बनेको छ । स्थानीय सक्रियता र सहभागिताको जगमा उभिएको संस्थाले सुरुवाती दिनदेखि नै उपभोक्तालाई सस्तो, भरपर्दो विद्युत् र कृषि सामग्री उपलब्ध गराउने लक्ष्य लिएको थियो ।</p>
                     </div>
-        
+
                 <!-- परिच्छेद २ – ऊर्जा साझेदारी (NEA बाट विद्युत खरीद) -->
                     <div class="paragraph-card">
                         <h2><span>२</span> ऊर्जा साझेदार : नेपाल विद्युत प्राधिकरण</h2>
                         <p>संस्थाको मूल कार्यक्षेत्र ऊर्जा वितरण हो । <strong>नेपाल विद्युत प्राधिकरण (NEA)</strong> सँगको औपचारिक सम्झौता अनुरूप जीवन ज्योतीले थोक बिजुली खरिद गरी आफ्ना सदस्य/उपभोक्तालाई वितरण गर्दै आएको छ । प्राधिकरणको प्रसारण लाइनबाट लिइएको विद्युत्लाई सहकारीले स्थानीय सञ्जालमार्फत हरदानी, खैरेनी, खर्गौली, परागीपुर क्षेत्रमा पुर्याउँछ । यसले प्राधिकरण र समुदायबीचको सेतुको काम गर्दै गाउँ–गाउँमा उज्यालो मात्र होइन, उद्यमशीलताको पनि बिजौटा रोपेको छ ।</p>
                     </div>
-        
+
                 <!-- परिच्छेद ३ – मल तथा कृषि सामग्री आपूर्ति -->
                       <div class="paragraph-card">
                           <h2><span>३</span> मल वितरण : साल्ट ट्रेडिङ् र कृषि सामग्री कम्पनी सँग सहकार्य</h2>
@@ -815,7 +833,7 @@
                               <li><strong>⚡ साल्ट ट्रेडिङ् र कृषि सामग्री कम्पनीसँग:</strong> बीउ, विषादी र आधुनिक उपकरणमा सहज पहुँच,रासायनिक मलको नियमित आपूर्ति, मूल्य स्थिरता।</li>
                           </ul>
                       </div>
-        
+
                 <!-- परिच्छेद ४ – सेवा विस्तार र भौगोलिक क्षेत्र -->
                     <div class="paragraph-card">
                         <h2><span>४</span> फैलँदो सेवा क्षेत्र : लम्कीचूहा–७ देखि परागीपुर सम्म</h2>
@@ -832,14 +850,14 @@
                             <p style="margin-top: 18px; color: #fffbdb; font-size: 1.1rem;">✧ यी क्षेत्रहरूमा विद्युत् पूर्वाधार र मल वितरण केन्द्र सञ्चालनमा छन् ।</p>
                         </div>
                     </div>
-        
+
                 <!-- परिच्छेद ५ – विकास क्रम र भावी आयाम -->
                       <div class="paragraph-card">
                           <h2><span>५</span> बढ्दो विकास क्रम : उज्यालोतर्फको यात्रा</h2>
                           <p>स्थापनाकालको सानो संरचनाबाट हालसम्म आइपुग्दा जीवन ज्योती सहकारीले विद्युत् गुणस्तर, नवीकरणीय ऊर्जा प्रवर्धन र कृषि आपूर्ति श्रृंखलामा उल्लेख्य प्रगति गरेको छ । नियमित रूपमा लाइन मर्मत, स्मार्ट मिटर प्रणालीतर्फ अग्रसरता, र किसानलाई समयमै मल पुर्याउन डिजिटल प्रणालीको परीक्षण जस्ता कार्यक्रम अघि बढाइरहेको छ । भौतिक पूर्वाधार मात्र होइन, संस्थागत सुशासन र सदस्य सेवामा सुधार गर्दै सहकारीले ग्रामीण विकासको नमुना बन्ने लक्ष्य लिएको छ । </p>
                           <p>आगामी दिनमा सौर्य ऊर्जा, सिँचाइ सहकार्य र कृषि प्रशोधन केन्द्र स्थापना गर्ने योजना रहेकोले जीवन ज्योती ग्रामीण विद्युत सहकारी केवल एक वितरण संस्था नभएर समृद्धिको साझेदार बन्दै गएको छ ।</p>
                       </div>
-              
+
               <!-- संस्थाको परिचयात्मक सारांश (थप पंक्ति) -->
             <div class="paragraph-card" style="justify-content:center">
                 <p style="font-size: 1.3rem; font-weight: 600; color: #1c501c;">💬 <em>“जीवन ज्योती ग्रामीण विद्युत सहकारी – स्थानीय स्रोत, सामूहिक प्रयास र दिगो विकासको उजेलो यात्रा”</em></p>
@@ -1043,14 +1061,14 @@
             <div class="jj-servicesItem fly-in" data-delay="100">
               <div class="jj-icon-services"><i class='bx bx-plug'></i><span></span></div>
               <h3>Electricity Distribution</h3>
-              <p>Providing consistent power supply to rural households and businesses.</p> 
+              <p>Providing consistent power supply to rural households and businesses.</p>
             <a href="#" class="jj-readMore" data-info-id="info1">Explore More</a>
                 <div id="info1" class="jj-hidden-info"><h4>Electricity Distribution</h4><p>We ensure a steady and reliable power supply.</p></div>
             </div>
             <div class="jj-servicesItem fly-in" data-delay="200"><div class="jj-icon-services"><i class='bx bx-sun'></i><span></span></div><h3>Energy Solutions</h3><p>Implementing solar panels and microgrids for sustainable energy.</p><a href="#" class="jj-readMore" data-info-id="info2">Explore More</a><div id="info2" class="jj-hidden-info"><h4>Energy Solutions</h4><p>Renewable energy for remote areas.</p></div></div>
-            
+
             <div class="jj-servicesItem fly-in" data-delay="300"><div class="jj-icon-services"><i class='bx bx-wrench'></i><span></span></div><h3>Maintenance Services</h3><p>Regular upkeep of electrical infrastructure for uninterrupted service.</p><a href="#" class="jj-readMore" data-info-id="info3">Explore More</a><div id="info3" class="jj-hidden-info"><h4>Maintenance Services</h4><p>Routine maintenance for safe supply.</p></div></div>
-            
+
             <div class="jj-servicesItem fly-in" data-delay="400"><div class="jj-icon-services"><i class='bx bx-bulb'></i><span></span></div><h3>Energy Education</h3><p>Training communities on energy conservation and safety practices.</p><a href="#" class="jj-readMore" data-info-id="info4">Explore More</a><div id="info4" class="jj-hidden-info"><h4>Energy Education</h4><p>Conservation and safety training.</p></div></div>
         </section>
         <section class="portfolio" id="portfolio">
@@ -1423,84 +1441,13 @@
           </div>
         </section>
         <div class="jj-footer"><p>Copyright © 2025 by Jeevan Jyoti Gramin Bidhyut Sahakari Sastha Ltd. | All Rights Reserved.</p></div>
-        <div class="jj-progress" id="progress"><span class="jj-progress-value" id="progress-value"><i class='bx bxs-chevrons-up'></i></span></div>        
+        <div class="jj-progress" id="progress"><span class="jj-progress-value" id="progress-value"><i class='bx bxs-chevrons-up'></i></span></div>
         <script>
-          
-          (function() {            
-            function normalizeNepaliText(text) {
-                if (typeof text !== 'string') return text;    
-                const temp = document.createElement('textarea');
-                temp.innerHTML = text;
-                return temp.value;
-            }
-        
-            // Override clipboard writeText
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                const originalWriteText = navigator.clipboard.writeText;
-                navigator.clipboard.writeText = function(text) {
-                    return originalWriteText.call(this, normalizeNepaliText(text));
-                };
-            }
-        
-            // Override document.execCommand('copy')
-            document.addEventListener('copy', function(e) {
-                const selection = window.getSelection();
-                if (selection && selection.toString()) {
-                    e.clipboardData.setData('text/plain', normalizeNepaliText(selection.toString()));
-                    e.preventDefault();
-                }
-            });
-        
-            // Fix for WhatsApp sharing
-            const originalOpen = window.open;
-            window.open = function(url, name, features) {
-                if (url && url.includes('wa.me') && url.includes('text=')) {
-                    const parts = url.split('text=');
-                    if (parts.length > 1) {
-                        const decodedText = decodeURIComponent(parts[1]);
-                        const normalizedText = normalizeNepaliText(decodedText);
-                        parts[1] = encodeURIComponent(normalizedText);
-                        url = parts.join('text=');
-                    }
-                }
-                return originalOpen.call(this, url, name, features);
-            };
-        
-            // Fix for mailto links
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('a[href^="mailto:"]')) {
-                    const link = e.target.closest('a[href^="mailto:"]');
-                    const href = link.getAttribute('href');
-                    if (href.includes('body=')) {
-                        const parts = href.split('body=');
-                        if (parts.length > 1) {
-                            const decodedBody = decodeURIComponent(parts[1]);
-                            const normalizedBody = normalizeNepaliText(decodedBody);
-                            parts[1] = encodeURIComponent(normalizedBody);
-                            link.setAttribute('href', parts.join('body='));
-                        }
-                    }
-                }
-            });
-        
-            // Fix for all data-content attributes
-            function fixDataAttributes() {
-                document.querySelectorAll('[data-content]').forEach(el => {
-                    if (el.dataset.content) {
-                        el.dataset.content = normalizeNepaliText(el.dataset.content);
-                    }
-                });
-            }
-        
-            // Run on DOM ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', fixDataAttributes);
-            } else {
-                fixDataAttributes();
-            }
-        })();
-        
-          
+          /* ✅ REMOVED the broken normalizeNepaliText block.
+             It wasn't doing anything useful and risked touching Devanagari text.
+             If you need clipboard normalization for any reason, do it very carefully
+             and NEVER apply it to Devanagari numerals. */
+
           (function() {
             // menu toggle
             const menuIcon = document.querySelector(".jj-menu-icon");
@@ -1511,7 +1458,7 @@
             if(menuIcon) menuIcon.addEventListener("click", (e) => { e.stopPropagation(); navlist.classList.toggle("active"); menuIcon.classList.toggle("active"); body.classList.toggle("jj-open"); });
             if(overlay) overlay.addEventListener("click", closeMenu);
             if(navlist) navlist.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
-            
+
             // rotating text setup
             function setupRotatingText() {
               document.querySelectorAll(".img-hero .rotate-text .text p").forEach(p => {
@@ -1527,7 +1474,7 @@
               });
             }
             setupRotatingText();
-           
+
             function setOrigin() {
               const allB = document.querySelectorAll('.img-hero .rotate-text .text b');
               const textDiv = document.querySelector('.img-hero .rotate-text .text');
@@ -1538,7 +1485,7 @@
             }
             window.addEventListener('load', () => setTimeout(setOrigin, 30));
             window.addEventListener('resize', () => { clearTimeout(window.originTimer); window.originTimer = setTimeout(setOrigin, 60); });
-            
+
             // about buttons
             const aboutBtns = document.querySelectorAll('.jj-about-btn button');
             const contents = document.querySelectorAll('.jj-content');
@@ -1552,7 +1499,7 @@
                 });
               });
             }
-            
+
             // MIXITUP FILTER
             let mixer = null;
             if (document.getElementById('portfolio-gallery')) {
@@ -1562,7 +1509,7 @@
                 load: { filter: 'all' }
               });
             }
-            
+
             const filterBtns = document.querySelectorAll('.filter-btn');
             filterBtns.forEach(btn => {
               btn.addEventListener('click', function() {
@@ -1570,39 +1517,32 @@
                 this.classList.add('active-filter');
               });
             });
-            
-            // Contact form functionality - FIXED VERSION
+
+            // Contact form functionality
             const sendWhatsApp = document.getElementById('sendWhatsApp');
             const sendEmail = document.getElementById('sendEmail');
-            
-            // Validation function - returns validation result and message
+
             function validateForm() {
               let isValid = true;
-              
-              // Reset error messages
               document.querySelectorAll('.jj-error-message').forEach(el => el.style.display = 'none');
               document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('jj-input-error'));
-              
-              // Get form values
+
               const firstName = document.getElementById('firstName')?.value.trim() || '';
               const lastName = document.getElementById('lastName')?.value.trim() || '';
               const email = document.getElementById('email')?.value.trim() || '';
               const subject = document.getElementById('subject')?.value.trim() || '';
               const message = document.getElementById('message')?.value.trim() || '';
-              
-              // Validate fields
+
               if (!firstName) {
                 document.getElementById('firstNameError').style.display = 'block';
                 document.getElementById('firstName').classList.add('jj-input-error');
                 isValid = false;
               }
-              
               if (!lastName) {
                 document.getElementById('lastNameError').style.display = 'block';
                 document.getElementById('lastName').classList.add('jj-input-error');
                 isValid = false;
               }
-              
               if (!email) {
                 document.getElementById('emailError').style.display = 'block';
                 document.getElementById('email').classList.add('jj-input-error');
@@ -1612,19 +1552,17 @@
                 document.getElementById('email').classList.add('jj-input-error');
                 isValid = false;
               }
-              
               if (!subject) {
                 document.getElementById('subjectError').style.display = 'block';
                 document.getElementById('subject').classList.add('jj-input-error');
                 isValid = false;
               }
-              
               if (!message) {
                 document.getElementById('messageError').style.display = 'block';
                 document.getElementById('message').classList.add('jj-input-error');
                 isValid = false;
               }
-              
+
               return {
                 isValid: isValid,
                 firstName: firstName,
@@ -1634,8 +1572,7 @@
                 message: message
               };
             }
-            
-            // Clear form fields
+
             function clearFormFields() {
               document.getElementById('firstName').value = '';
               document.getElementById('lastName').value = '';
@@ -1643,14 +1580,11 @@
               document.getElementById('subject').value = '';
               document.getElementById('message').value = '';
             }
-            
-            // WhatsApp functionality
+
             if (sendWhatsApp) {
               sendWhatsApp.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const validation = validateForm();
-                
                 if (!validation.isValid) {
                   Swal.fire({
                     icon: 'error',
@@ -1660,30 +1594,22 @@
                   });
                   return;
                 }
-                
                 const fullMessage = `*गुनासो तथा प्रतिक्रिया to Jeevan Jyoti*\n\n*Name:* ${validation.firstName} ${validation.lastName}\n*Email:* ${validation.email}\n*Subject:* ${validation.subject}\n*Message:* ${validation.message}`;
-                
-                // WhatsApp number - use the correct one
                 window.open(`https://wa.me/9823397879?text=${encodeURIComponent(fullMessage)}`, '_blank');
-                
                 Swal.fire({
                   icon: 'success',
                   title: 'Message Sent!',
                   text: 'Your message has been opened in WhatsApp.',
                   confirmButtonColor: '#e6006d'
                 });
-                
                 clearFormFields();
               });
             }
-            
-            // Email functionality
+
             if (sendEmail) {
               sendEmail.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const validation = validateForm();
-                
                 if (!validation.isValid) {
                   Swal.fire({
                     icon: 'error',
@@ -1693,21 +1619,18 @@
                   });
                   return;
                 }
-                
-                const fullMessage = `\u0917\u0941\u0928\u093e\u0938\u094b \u0924\u0925\u093e \u092a\u094d\u0930\u0924\u093f\u0915\u094d\u0930\u093f\u092f\u093e to Jeevan Jyoti\n\nName: ${validation.firstName} ${validation.lastName}\nEmail: ${validation.email}\nSubject: ${validation.subject}\nMessage: ${validation.message}`;
-                
-                window.location.href =`mailto:jeevanjyotigraminbidhdhut2065@gmail.com?subject=${encodeURIComponent(validation.subject)}&body=${encodeURIComponent(fullMessage)}`;        
+                const fullMessage = `गुनासो तथा प्रतिक्रिया to Jeevan Jyoti\n\nName: ${validation.firstName} ${validation.lastName}\nEmail: ${validation.email}\nSubject: ${validation.subject}\nMessage: ${validation.message}`;
+                window.location.href = `mailto:jeevanjyotigraminbidhdhut2065@gmail.com?subject=${encodeURIComponent(validation.subject)}&body=${encodeURIComponent(fullMessage)}`;
                 Swal.fire({
                   icon: 'success',
                   title: 'Email Ready!',
                   text: 'Your email client has been opened.',
                   confirmButtonColor: '#e6006d'
                 });
-                
                 clearFormFields();
               });
             }
-            
+
             // read more
             document.querySelectorAll('.jj-readMore').forEach(link => {
               link.addEventListener('click', (e) => {
@@ -1722,13 +1645,13 @@
                 }
               });
             });
-            
+
             document.addEventListener('click', (e) => {
               if(!e.target.closest('.jj-readMore') && !e.target.closest('.jj-hidden-info')) {
                 document.querySelectorAll('.jj-hidden-info').forEach(h => h.classList.remove('active'));
               }
             });
-            
+
             // progress
             const progress = document.getElementById('progress');
             window.addEventListener('scroll', () => {
@@ -1738,11 +1661,11 @@
               if (pos > 200) progress.style.display = 'grid'; else progress.style.display = 'none';
               progress.style.background = `conic-gradient(#fff ${scrollValue}%, #e6006d ${scrollValue}%)`;
             });
-            
+
             if(progress) {
               progress.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             }
-            
+
             // active nav
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.jj-nav li a');
@@ -1767,10 +1690,10 @@
                 }
               });
             }, { threshold: 0.1 });
-            
+
             flyElements.forEach(el => observer.observe(el));
           })();
-          
+
           // bill popup fullscreen
           function showFormPopup() {
             Swal.fire({
@@ -1786,8 +1709,8 @@
             });
           }
         </script>
-        
-        <style> 
+
+        <style>
           .header-decoration {
                     text-align: center;
                     margin-bottom: 30px;
@@ -1814,6 +1737,8 @@
                     font-weight: 500;
                     margin-top: 5px;
                     box-shadow: 0 4px 10px #b1d18b;
+                    /* ✅ Force a Devanagari-capable font here specifically */
+                    font-family: 'Noto Sans Devanagari', 'Mukta', 'Poppins', 'Mangal', sans-serif;
                 }
                 .intro-verse {
                     background: #e3f5d3;
@@ -1941,34 +1866,34 @@
             width: 120px;
             justify-content: center;
           }
-          
+
           .jj-feedback-btn-whatsapp button {
             background-color: #25D366;
             color: white;
             border: none;
           }
-          
+
           .jj-feedback-btn-whatsapp button:hover {
             background-color: #128C7E;
           }
-          
+
           .jj-feedback-btn-email button {
             background-color: var(--primary);
             color: white;
             border: none;
           }
-          
+
           .jj-feedback-btn-email button:hover {
             background-color: #c1121f;
           }
-          
+
           .formsummitbtn {
             display: flex;
             justify-content: space-around;
             gap: 10px;
             margin-top: 20px;
           }
-          
+
           .formBtn {
             border: none;
           }
